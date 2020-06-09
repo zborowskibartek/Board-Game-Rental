@@ -64,7 +64,7 @@ public class BoardGame {
         this.description = description;
     }
 
-    public boolean isRented() {
+    public boolean getRented() {
         return rented;
     }
 

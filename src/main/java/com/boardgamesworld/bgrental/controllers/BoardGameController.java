@@ -1,43 +1,41 @@
 package com.boardgamesworld.bgrental.controllers;
 
 import com.boardgamesworld.bgrental.entities.BoardGame;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.boardgamesworld.bgrental.services.BoardGameService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/boardgames")
+@RequestMapping("/api/boardgames")
 public class BoardGameController {
 
-    private List<BoardGame> boardGameList;
+    @Autowired
+    private BoardGameService boardGameService;
 
-    public BoardGameController() {
+    @GetMapping("")
+    public List<BoardGame> getAllBoardGames() {
+        return boardGameService.getAllBoardGames();
     }
 
-    public BoardGameController(List<BoardGame> boardGameList) {
-        this.boardGameList = boardGameList;
+    @PostMapping("")
+    public void addBoardGame(@RequestBody BoardGame boardGame) {
+        boardGameService.addBoardGame(boardGame);
     }
 
-    public List<BoardGame> getBoardGameList() {
-        return boardGameList;
+    @PutMapping("/{boardGameId}")
+    public void updateBoardGame(@PathVariable int boardGameId, @RequestBody BoardGame updatedBoardGame) {
+        boardGameService.updateBoardGame(boardGameId, updatedBoardGame);
     }
 
-    public void setBoardGameList(List<BoardGame> boardGameList) {
-        this.boardGameList = boardGameList;
+    @GetMapping("/{boardGameId}")
+    public BoardGame getBoardGameById(@PathVariable int boardGameId) {
+        return boardGameService.getBoardGame(boardGameId);
     }
 
-    @GetMapping("/{index}")
-    public BoardGame getBoardGame(int index){
-        return boardGameList.get(index);
+    @DeleteMapping("/{boardGameId}")
+    public void deleteBoardGame(@PathVariable int boardGameId) {
+        boardGameService.deleteBoardGame(boardGameId);
     }
-
-
-
-
-
-
-
-
 }
