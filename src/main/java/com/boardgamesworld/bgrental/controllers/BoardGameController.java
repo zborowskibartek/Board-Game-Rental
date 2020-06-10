@@ -11,8 +11,12 @@ import java.util.List;
 @RequestMapping("/api/boardgames")
 public class BoardGameController {
 
-    @Autowired
     private BoardGameService boardGameService;
+
+    @Autowired
+    public BoardGameController(BoardGameService boardGameService) {
+        this.boardGameService = boardGameService;
+    }
 
     @GetMapping("")
     public List<BoardGame> getAllBoardGames() {
