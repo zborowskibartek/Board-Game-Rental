@@ -20,15 +20,16 @@ public class UserRentalService {
         this.boardGameService = boardGameService;
     }
 
-    void rentBoardGame(long customerId, long boardGameId) {
-        userService.addBoardGameToUserAtPresentRentedList(customerId, boardGameId);
+    public void rentBoardGame(long userId, long boardGameId) {
+        userService.addBoardGameToUserAtPresentRentedList(userId, boardGameId);
         boardGameService.changeBoardGameStatusAsRented(boardGameId);
     }
 
-    void returnBoardGame(long customerId, long boardGameId) {
-        userService.removeBoardGameFromUserAtPresentRentedList(customerId, boardGameId);
-        userService.addBoardGameToUserRentedHistory(customerId, boardGameId);
+    public void returnBoardGame(long userId, long boardGameId) {
+        userService.removeBoardGameFromUserAtPresentRentedList(userId, boardGameId);
+        userService.addBoardGameToUserRentedHistory(userId, boardGameId);
         boardGameService.changeBoardGameStatusAsReturned(boardGameId);
     }
 
 }
+

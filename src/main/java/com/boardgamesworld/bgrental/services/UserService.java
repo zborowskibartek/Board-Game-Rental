@@ -20,24 +20,6 @@ public class UserService {
         this.boardGameRepository = boardGameRepository;
     }
 
-    public void addBoardGameToUserRentedHistory(long userId, long boardGameId){
-        customerRepository.getUser(userId)
-                .getRentedBoardGamesHistory()
-                .add(boardGameRepository.getBoardGame(boardGameId));
-    }
-
-    public void addBoardGameToUserAtPresentRentedList(long userId, long boardGameId){
-        customerRepository.getUser(userId)
-                .getAtPresentRentedBoardGames()
-                .add(boardGameRepository.getBoardGame(boardGameId));
-    }
-
-    public void removeBoardGameFromUserAtPresentRentedList(long userId, long boardGameId){
-        customerRepository.getUser(userId)
-                .getAtPresentRentedBoardGames()
-                .remove(boardGameRepository.getBoardGame(boardGameId));
-    }
-
     public List<User> getAllUser() {
         return customerRepository.getAllUser();
     }
@@ -50,8 +32,30 @@ public class UserService {
         customerRepository.addUser(user);
     }
 
+    public void updateCustomer(long userIdToUpdate, User userWithUpdatedProperties) {
+        customerRepository.updateUser(userIdToUpdate, userWithUpdatedProperties);
+    }
+
     public void deleteUser(long userId) {
         customerRepository.deleteUser(userId);
+    }
+
+    void addBoardGameToUserRentedHistory(long userId, long boardGameId) {
+        customerRepository.getUser(userId)
+                .getRentedBoardGamesHistory()
+                .add(boardGameRepository.getBoardGame(boardGameId));
+    }
+
+    void addBoardGameToUserAtPresentRentedList(long userId, long boardGameId) {
+        customerRepository.getUser(userId)
+                .getAtPresentRentedBoardGames()
+                .add(boardGameRepository.getBoardGame(boardGameId));
+    }
+
+    void removeBoardGameFromUserAtPresentRentedList(long userId, long boardGameId) {
+        customerRepository.getUser(userId)
+                .getAtPresentRentedBoardGames()
+                .remove(boardGameRepository.getBoardGame(boardGameId));
     }
 
 

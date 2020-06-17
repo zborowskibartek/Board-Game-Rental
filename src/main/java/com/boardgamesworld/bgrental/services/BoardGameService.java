@@ -29,8 +29,8 @@ public class BoardGameService {
         boardGameRepository.addBoardGame(boardGame);
     }
 
-    public void updateBoardGame(long boardGameId, BoardGame updatedBoardGame) {
-        boardGameRepository.updateBoardGame(boardGameId, updatedBoardGame);
+    public void updateBoardGame(long boardGameIdToUpdate, BoardGame boardGameWithUpdatedProperties) {
+        boardGameRepository.updateBoardGame(boardGameIdToUpdate, boardGameWithUpdatedProperties);
     }
 
     public void deleteBoardGame(long boardGameId) {

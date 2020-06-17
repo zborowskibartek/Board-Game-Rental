@@ -59,7 +59,7 @@ public class BoardGameArrayListRepository implements BoardGameRepository {
                     if (updatedBoardGame.getDetails().getDescription() != null) {
                         boardGame.getDetails().setDescription(updatedBoardGame.getDetails().getDescription());
                     }
-                    boardGame.setRented(updatedBoardGame.getRented());
+                    boardGame.setRented(updatedBoardGame.isRented());
                 });
     }
 

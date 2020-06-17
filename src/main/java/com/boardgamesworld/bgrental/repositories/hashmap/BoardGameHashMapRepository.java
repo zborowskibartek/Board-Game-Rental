@@ -1,16 +1,13 @@
 package com.boardgamesworld.bgrental.repositories.hashmap;
 
-import com.boardgamesworld.bgrental.model.BoardGame;
-import com.boardgamesworld.bgrental.model.BoardGameCondition;
-import com.boardgamesworld.bgrental.model.BoardGameDetails;
+import com.boardgamesworld.bgrental.model.*;
 import com.boardgamesworld.bgrental.repositories.interfaces.BoardGameRepository;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.function.BinaryOperator;
 
 @Primary
 @Repository
@@ -21,22 +18,13 @@ public class BoardGameHashMapRepository implements BoardGameRepository {
 
     public BoardGameHashMapRepository() {
         boardGames = new HashMap<>();
-
-        BoardGame boardGame1 = new BoardGame(1,"Imperial Settlers", 10, false,
-                BoardGameCondition.GOOD, new BoardGameDetails("Cool game"));
-        BoardGame boardGame2 = new BoardGame(2, "Gloomhaven", 20, true,
-                BoardGameCondition.PERFECT, new BoardGameDetails("Heavy game"));
-        boardGames.put(boardGame1.getBoardGameId(), boardGame1);
-        boardGames.put(boardGame2.getBoardGameId(), boardGame2);
+        createInitialBoardGames(boardGames);
     }
 
     @Override
     public List<BoardGame> getAllBoardGames() {
-        return boardGames.entrySet().stream()
-                .map(Map.Entry::getValue)
-                .collect(Collectors.toList());
+        return new ArrayList<>(boardGames.values());
     }
-
 
     @Override
     public BoardGame getBoardGame(long boardGameId) {
@@ -46,27 +34,12 @@ public class BoardGameHashMapRepository implements BoardGameRepository {
     @Override
     public void addBoardGame(BoardGame boardGame) {
         boardGames.put(boardGame.getBoardGameId(), boardGame);
-
     }
 
     @Override
-    public void updateBoardGame(long boardGameId, BoardGame updatedBoardGame) {
-        if (isBoardGameInRepository(boardGameId)) {
-            BoardGame boardGameToUpdate = boardGames.get(boardGameId);
-
-            if (updatedBoardGame.getName() != null){
-                boardGameToUpdate.setName(updatedBoardGame.getName());
-            }
-            if (updatedBoardGame.getPricePerDay() < 0){
-                boardGameToUpdate.setPricePerDay(updatedBoardGame.getPricePerDay());
-            }
-                boardGameToUpdate.setRented(updatedBoardGame.getRented());
-            if (updatedBoardGame.getCondition() != null){
-                boardGameToUpdate.setCondition(updatedBoardGame.getCondition());
-            }
-            if (updatedBoardGame.getDetails() != null){
-                boardGameToUpdate.setDetails(updatedBoardGame.getDetails());
-            }
+    public void updateBoardGame(long boardGameIdToUpdate, BoardGame boardGameWithUpdatedProperties) {
+        if (isBoardGameInRepository(boardGameIdToUpdate)) {
+            updateBoardGameProperties(getBoardGame(boardGameIdToUpdate), boardGameWithUpdatedProperties);
         }
     }
 
@@ -77,17 +50,46 @@ public class BoardGameHashMapRepository implements BoardGameRepository {
         }
     }
 
-    private boolean isBoardGameInRepository(long boardGameId){
+    private boolean isBoardGameInRepository(long boardGameId) {
         if (boardGames.containsKey(boardGameId)) {
             return true;
         }
-            throw new IllegalArgumentException("Wrong board game ID. Can not find in repository!");
+        throw new IllegalArgumentException("Wrong board game ID. Can not find in repository!");
     }
 
-    @Override
-    public String toString() {
-        return "BoardGameHashMapRepository{" +
-                "boardGameMap=" + boardGames +
-                '}';
+    private void updateBoardGameProperties(BoardGame boardGameToUpdate, BoardGame boardGameWithUpdatedProperties) {
+        if (boardGameWithUpdatedProperties.getName() != null) {
+            boardGameToUpdate.setName(boardGameWithUpdatedProperties.getName());
+        }
+        if (boardGameWithUpdatedProperties.getPricePerDay() < 0) {
+            boardGameToUpdate.setPricePerDay(boardGameWithUpdatedProperties.getPricePerDay());
+        }
+        if (boardGameWithUpdatedProperties.getCondition() != null) {
+            boardGameToUpdate.setCondition(boardGameWithUpdatedProperties.getCondition());
+        }
+        if (boardGameWithUpdatedProperties.getDetails() != null) {
+            boardGameToUpdate.setDetails(boardGameWithUpdatedProperties.getDetails());
+        }
+        boardGameToUpdate.setRented(boardGameWithUpdatedProperties.isRented());
     }
+
+    private static void createInitialBoardGames(Map boardGames) {
+        BoardGameDetails boardGameDetails =
+                new BoardGameDetails("Heavy game",
+                        1,
+                        5,
+                        "Isac",
+                        "Albi",
+                        Arrays.asList(BoardGameType.BOARD_GAME, BoardGameType.CARD_GAME),
+                        Arrays.asList(BoardGameCategory.ADVENTURE, BoardGameCategory.FANTASY, BoardGameCategory.STRATEGY)
+                );
+
+        BoardGame boardGame1 = new BoardGame(1, "Imperial Settlers", 10, false,
+                BoardGameCondition.GOOD, new BoardGameDetails("Cool game"));
+        BoardGame boardGame2 = new BoardGame(2, "Gloomhaven", 20, true,
+                BoardGameCondition.PERFECT, boardGameDetails);
+        boardGames.put(boardGame1.getBoardGameId(), boardGame1);
+        boardGames.put(boardGame2.getBoardGameId(), boardGame2);
+    }
+
 }

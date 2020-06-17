@@ -1,7 +1,6 @@
 package com.boardgamesworld.bgrental.repositories.hashmap;
 
-import com.boardgamesworld.bgrental.model.BoardGame;
-import com.boardgamesworld.bgrental.model.User;
+import com.boardgamesworld.bgrental.model.*;
 import com.boardgamesworld.bgrental.repositories.interfaces.UserRepository;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
@@ -17,11 +16,8 @@ public class UserHashMapRepository implements UserRepository {
 
     public UserHashMapRepository() {
         users = new HashMap<>();
-
-        User user = new User(1, "Bartek", "Zboro",
-                "email@example.com", "bartas95", "password123", new HashSet<>(), new ArrayList<>());
-        users.put(user.getUserId(), user);
-    }
+        createInitialUsers(users);
+        }
 
     @Override
     public List<User> getAllUser() {
@@ -39,6 +35,13 @@ public class UserHashMapRepository implements UserRepository {
     }
 
     @Override
+    public void updateUser(long userIdToUpdate, User userWithUpdatedProperties) {
+        if (isUserInRepository(userIdToUpdate)) {
+            updateUserProperties(getUser(userIdToUpdate), userWithUpdatedProperties);
+        }
+    }
+
+    @Override
     public void deleteUser(long userId) {
         if (isUserInRepository(userId)) {
             users.remove(userId);
@@ -46,7 +49,7 @@ public class UserHashMapRepository implements UserRepository {
     }
 
     @Override
-    public Set<BoardGame> getAllAtPresentRentedBoardGamesByUser(long userId) {
+    public List<BoardGame> getAllAtPresentRentedBoardGamesByUser(long userId) {
         User user = users.get(userId);
         return user.getAtPresentRentedBoardGames();
     }
@@ -64,5 +67,22 @@ public class UserHashMapRepository implements UserRepository {
         throw new IllegalArgumentException("Wrong user ID. Can not find in repository!");
     }
 
+    private void updateUserProperties(User userToUpdate, User userWithUpdatedProperties) {
+        if (userWithUpdatedProperties.getFirstName() != null) {
+            userToUpdate.setFirstName(userWithUpdatedProperties.getFirstName());
+        }
+        if (userWithUpdatedProperties.getSecondName() != null) {
+            userToUpdate.setSecondName(userWithUpdatedProperties.getSecondName());
+        }
+        if (userWithUpdatedProperties.getEmail() != null) {
+            userToUpdate.setEmail(userWithUpdatedProperties.getEmail());
+        }
+    }
+
+    private static void createInitialUsers(Map users) {
+        User user = new User(1, "Bartek", "Zboro",
+                "email@example.com", "bartas95", "password123", new ArrayList<>(), new ArrayList<>());
+        users.put(user.getUserId(), user);
+    }
 
 }
