@@ -1,6 +1,7 @@
-package com.boardgamesworld.bgrental.dao;
+package com.boardgamesworld.bgrental.repositories.mongodb;
 
-import com.boardgamesworld.bgrental.entities.BoardGame;
+import com.boardgamesworld.bgrental.model.BoardGame;
+import com.boardgamesworld.bgrental.repositories.interfaces.BoardGameRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class BoardGameMongoDbRepository implements BoardGameRepository {
     }
 
     @Override
-    public BoardGame getBoardGame(int boardGameId) {
+    public BoardGame getBoardGame(long boardGameId) {
         return null;
     }
 
@@ -24,12 +25,12 @@ public class BoardGameMongoDbRepository implements BoardGameRepository {
     }
 
     @Override
-    public void updateBoardGame(int boardGameId, BoardGame updatedBoardGame) {
+    public void updateBoardGame(long boardGameId, BoardGame updatedBoardGame) {
 
     }
 
     @Override
-    public void deleteBoardGame(int boardGameId) {
+    public void deleteBoardGame(long boardGameId) {
 
     }
 }

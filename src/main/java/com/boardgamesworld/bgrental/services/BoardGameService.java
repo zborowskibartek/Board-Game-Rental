@@ -1,7 +1,7 @@
 package com.boardgamesworld.bgrental.services;
 
-import com.boardgamesworld.bgrental.dao.BoardGameRepository;
-import com.boardgamesworld.bgrental.entities.BoardGame;
+import com.boardgamesworld.bgrental.repositories.interfaces.BoardGameRepository;
+import com.boardgamesworld.bgrental.model.BoardGame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ public class BoardGameService {
         return boardGameRepository.getAllBoardGames();
     }
 
-    public BoardGame getBoardGame(int boardGameId) {
+    public BoardGame getBoardGame(long boardGameId) {
         return boardGameRepository.getBoardGame(boardGameId);
     }
 
@@ -29,12 +29,31 @@ public class BoardGameService {
         boardGameRepository.addBoardGame(boardGame);
     }
 
-    public void updateBoardGame(int boardGameId, BoardGame updatedBoardGame) {
+    public void updateBoardGame(long boardGameId, BoardGame updatedBoardGame) {
         boardGameRepository.updateBoardGame(boardGameId, updatedBoardGame);
     }
 
-    public void deleteBoardGame(int boardGameId) {
+    public void deleteBoardGame(long boardGameId) {
         boardGameRepository.deleteBoardGame(boardGameId);
     }
+
+    public void changeBoardGameStatusAsRented(long boardGameId){
+        BoardGame boardGameToChangeStatus = getBoardGame(boardGameId);
+        if (!boardGameToChangeStatus.isRented()){
+            boardGameToChangeStatus.setRented(true);
+        } else {
+            throw new IllegalStateException("Board game is already rented! Choose another one.");
+        }
+    }
+
+    public void changeBoardGameStatusAsReturned(long boardGameId){
+        BoardGame boardGameToChangeStatus = getBoardGame(boardGameId);
+        if (boardGameToChangeStatus.isRented()){
+            boardGameToChangeStatus.setRented(false);
+        } else {
+            throw new IllegalStateException("Board game is already returned! Choose another one.");
+        }
+    }
+
 
 }

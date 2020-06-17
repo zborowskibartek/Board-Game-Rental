@@ -1,4 +1,4 @@
-package com.boardgamesworld.bgrental.entities;
+package com.boardgamesworld.bgrental.model;
 
 public enum BoardGameCondition {
 
