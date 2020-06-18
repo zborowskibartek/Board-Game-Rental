@@ -1,0 +1,29 @@
+[33mcommit 51822ad67f9ea5befaa17740ef6350da85fa1d21[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m)[m
+Author: Bartosz Zborowski <zborowski.bartek@gmail.com>
+Date:   Wed Jun 17 19:39:41 2020 +0200
+
+    Add user, user repo, user service and user rental service
+
+[33mcommit c0dabd7476a8cd50572e6bbb2069e8f7245b570f[m[33m ([m[1;31morigin/develop[m[33m)[m
+Author: Bartosz Zborowski <zborowski.bartek@gmail.com>
+Date:   Wed Jun 10 11:15:03 2020 +0200
+
+    Add board game repository interface and set primary repo
+
+[33mcommit 903d69cba57b432a79b42849783ac9616b8f87d0[m
+Author: Bartosz Zborowski <zborowski.bartek@gmail.com>
+Date:   Tue Jun 9 22:38:46 2020 +0200
+
+    Add board game service
+
+[33mcommit b222304d137ca53bf718debd68a0a619c9ddd0b6[m
+Author: Bartosz Zborowski <zborowski.bartek@gmail.com>
+Date:   Tue Jun 9 14:37:58 2020 +0200
+
+    Add board game controller
+
+[33mcommit 9d768dfc192bb6f2ef9c14c4f56c9c7731e55254[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Bartosz Zborowski <zborowski.bartek@gmail.com>
+Date:   Tue Jun 9 14:13:48 2020 +0200
+
+    Add initial commit
