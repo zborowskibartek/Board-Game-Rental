@@ -49,7 +49,7 @@ public class UserHashMapRepository implements UserRepository {
     }
 
     @Override
-    public List<BoardGame> getAllAtPresentRentedBoardGamesByUser(long userId) {
+    public Set<BoardGame> getAllAtPresentRentedBoardGamesByUser(long userId) {
         User user = users.get(userId);
         return user.getAtPresentRentedBoardGames();
     }
@@ -81,7 +81,7 @@ public class UserHashMapRepository implements UserRepository {
 
     private static void createInitialUsers(Map users) {
         User user = new User(1, "Bartek", "Zboro",
-                "email@example.com", "bartas95", "password123", new ArrayList<>(), new ArrayList<>());
+                "email@example.com", "bartas95", "password123", new HashSet<>(), new ArrayList<>());
         users.put(user.getUserId(), user);
     }
 

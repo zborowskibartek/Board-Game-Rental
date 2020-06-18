@@ -37,7 +37,7 @@ public class BoardGameService {
         boardGameRepository.deleteBoardGame(boardGameId);
     }
 
-    public void changeBoardGameStatusAsRented(long boardGameId){
+    void changeBoardGameStatusAsRented(long boardGameId){
         BoardGame boardGameToChangeStatus = getBoardGame(boardGameId);
         if (!boardGameToChangeStatus.isRented()){
             boardGameToChangeStatus.setRented(true);
@@ -46,7 +46,7 @@ public class BoardGameService {
         }
     }
 
-    public void changeBoardGameStatusAsReturned(long boardGameId){
+    void changeBoardGameStatusAsReturned(long boardGameId){
         BoardGame boardGameToChangeStatus = getBoardGame(boardGameId);
         if (boardGameToChangeStatus.isRented()){
             boardGameToChangeStatus.setRented(false);

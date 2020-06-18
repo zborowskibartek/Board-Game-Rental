@@ -4,6 +4,7 @@ import com.boardgamesworld.bgrental.model.BoardGame;
 import com.boardgamesworld.bgrental.model.User;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserRepository {
 
@@ -17,7 +18,7 @@ public interface UserRepository {
 
     void deleteUser(long userId);
 
-    List<BoardGame> getAllAtPresentRentedBoardGamesByUser(long userId);
+    Set<BoardGame> getAllAtPresentRentedBoardGamesByUser(long userId);
 
     List<BoardGame> getAllRentedBoardGamesHistoryByUser(long userId);
 }

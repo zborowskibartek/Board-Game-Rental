@@ -15,13 +15,13 @@ public class UserRentalController {
         this.userRentalService = userRentalService;
     }
 
-    @PostMapping("/{userId}/rent/{boardGameId}")
-    public void rentBoardGame(@PathVariable long userId, @PathVariable long boardGameId) {
+    @PostMapping("/rent")
+    public void rentBoardGame(@RequestParam long userId, @RequestParam long boardGameId) {
         userRentalService.rentBoardGame(userId, boardGameId);
     }
 
-    @PostMapping("/{userId}/return/{boardGameId}")
-    public void returnBoardGame(@PathVariable long userId, @PathVariable long boardGameId) {
+    @PostMapping("/return")
+    public void returnBoardGame(@RequestParam long userId, @RequestParam long boardGameId) {
         userRentalService.returnBoardGame(userId, boardGameId);
     }
 }

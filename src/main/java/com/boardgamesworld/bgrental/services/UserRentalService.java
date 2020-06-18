@@ -21,14 +21,14 @@ public class UserRentalService {
     }
 
     public void rentBoardGame(long userId, long boardGameId) {
-        userService.addBoardGameToUserAtPresentRentedList(userId, boardGameId);
         boardGameService.changeBoardGameStatusAsRented(boardGameId);
+        userService.addBoardGameToUserAtPresentRentedList(userId, boardGameId);
     }
 
     public void returnBoardGame(long userId, long boardGameId) {
+        boardGameService.changeBoardGameStatusAsReturned(boardGameId);
         userService.removeBoardGameFromUserAtPresentRentedList(userId, boardGameId);
         userService.addBoardGameToUserRentedHistory(userId, boardGameId);
-        boardGameService.changeBoardGameStatusAsReturned(boardGameId);
     }
 
 }
