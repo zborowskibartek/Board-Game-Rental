@@ -1,8 +1,8 @@
 package com.boardgamesworld.bgrental.services;
 
 import com.boardgamesworld.bgrental.model.User;
-import com.boardgamesworld.bgrental.repositories.interfaces.BoardGameRepository;
-import com.boardgamesworld.bgrental.repositories.interfaces.UserRepository;
+import com.boardgamesworld.bgrental.repositories.BoardGameRepository;
+import com.boardgamesworld.bgrental.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

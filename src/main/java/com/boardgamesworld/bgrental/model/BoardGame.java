@@ -1,5 +1,7 @@
 package com.boardgamesworld.bgrental.model;
 
+import com.boardgamesworld.bgrental.model.details.BoardGameCondition;
+import com.boardgamesworld.bgrental.model.details.BoardGameDetails;
 import lombok.Getter;
 import lombok.Setter;
 

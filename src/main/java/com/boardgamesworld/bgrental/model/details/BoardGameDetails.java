@@ -1,4 +1,4 @@
-package com.boardgamesworld.bgrental.model;
+package com.boardgamesworld.bgrental.model.details;
 
 import lombok.Getter;
 import lombok.Setter;

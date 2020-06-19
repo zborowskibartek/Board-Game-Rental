@@ -1,4 +1,4 @@
-package com.boardgamesworld.bgrental.repositories.interfaces;
+package com.boardgamesworld.bgrental.repositories;
 
 import com.boardgamesworld.bgrental.model.BoardGame;
 import com.boardgamesworld.bgrental.model.User;
@@ -18,7 +18,4 @@ public interface UserRepository {
 
     void deleteUser(long userId);
 
-    Set<BoardGame> getAllAtPresentRentedBoardGamesByUser(long userId);
-
-    List<BoardGame> getAllRentedBoardGamesHistoryByUser(long userId);
 }

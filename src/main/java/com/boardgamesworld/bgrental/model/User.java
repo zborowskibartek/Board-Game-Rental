@@ -15,8 +15,6 @@ public class User {
     private String email;
     private String username;
     private String password;
-    private Set<BoardGame> atPresentRentedBoardGames;
-    private List<BoardGame> rentedBoardGamesHistory;
 
     public User() {
     }
@@ -26,17 +24,13 @@ public class User {
                 String secondName,
                 String email,
                 String username,
-                String password,
-                Set<BoardGame> atPresentRentedBoardGames,
-                List<BoardGame> rentedBoardGamesHistory) {
+                String password) {
         this.userId = userId;
         this.firstName = firstName;
         this.secondName = secondName;
         this.email = email;
         this.username = username;
         this.password = password;
-        this.atPresentRentedBoardGames = atPresentRentedBoardGames;
-        this.rentedBoardGamesHistory = rentedBoardGamesHistory;
     }
 
 

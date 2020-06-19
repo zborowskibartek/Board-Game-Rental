@@ -1,4 +1,4 @@
-package com.boardgamesworld.bgrental.repositories.interfaces;
+package com.boardgamesworld.bgrental.repositories;
 
 import com.boardgamesworld.bgrental.model.BoardGame;
 

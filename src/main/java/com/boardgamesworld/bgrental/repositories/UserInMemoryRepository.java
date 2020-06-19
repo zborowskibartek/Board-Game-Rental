@@ -1,7 +1,7 @@
-package com.boardgamesworld.bgrental.repositories.hashmap;
+package com.boardgamesworld.bgrental.repositories;
 
 import com.boardgamesworld.bgrental.model.*;
-import com.boardgamesworld.bgrental.repositories.interfaces.UserRepository;
+import com.boardgamesworld.bgrental.repositories.UserRepository;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
@@ -10,11 +10,11 @@ import java.util.*;
 
 @Primary
 @Repository
-public class UserHashMapRepository implements UserRepository {
+public class UserInMemoryRepository implements UserRepository {
 
     private Map<Long, User> users;
 
-    public UserHashMapRepository() {
+    public UserInMemoryRepository() {
         users = new HashMap<>();
         createInitialUsers(users);
         }
@@ -48,17 +48,8 @@ public class UserHashMapRepository implements UserRepository {
         }
     }
 
-    @Override
-    public Set<BoardGame> getAllAtPresentRentedBoardGamesByUser(long userId) {
-        User user = users.get(userId);
-        return user.getAtPresentRentedBoardGames();
-    }
 
-    @Override
-    public List<BoardGame> getAllRentedBoardGamesHistoryByUser(long userId) {
-        User user = users.get(userId);
-        return user.getRentedBoardGamesHistory();
-    }
+
 
     private boolean isUserInRepository(long userId) {
         if (users.containsKey(userId)) {
@@ -81,7 +72,7 @@ public class UserHashMapRepository implements UserRepository {
 
     private static void createInitialUsers(Map users) {
         User user = new User(1, "Bartek", "Zboro",
-                "email@example.com", "bartas95", "password123", new HashSet<>(), new ArrayList<>());
+                "email@example.com", "bartas95", "password123");
         users.put(user.getUserId(), user);
     }
 

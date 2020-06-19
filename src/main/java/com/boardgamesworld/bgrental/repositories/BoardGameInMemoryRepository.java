@@ -1,22 +1,23 @@
-package com.boardgamesworld.bgrental.repositories.hashmap;
+package com.boardgamesworld.bgrental.repositories;
 
 import com.boardgamesworld.bgrental.model.*;
-import com.boardgamesworld.bgrental.repositories.interfaces.BoardGameRepository;
+import com.boardgamesworld.bgrental.model.details.BoardGameCategory;
+import com.boardgamesworld.bgrental.model.details.BoardGameCondition;
+import com.boardgamesworld.bgrental.model.details.BoardGameDetails;
+import com.boardgamesworld.bgrental.model.details.BoardGameType;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.function.BinaryOperator;
 
 @Primary
 @Repository
-public class BoardGameHashMapRepository implements BoardGameRepository {
+public class BoardGameInMemoryRepository implements BoardGameRepository {
 
     private Map<Long, BoardGame> boardGames;
 
 
-    public BoardGameHashMapRepository() {
+    public BoardGameInMemoryRepository() {
         boardGames = new HashMap<>();
         createInitialBoardGames(boardGames);
     }
