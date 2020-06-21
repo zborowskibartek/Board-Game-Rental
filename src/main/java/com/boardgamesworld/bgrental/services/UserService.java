@@ -40,7 +40,7 @@ public class UserService {
         customerRepository.deleteUser(userId);
     }
 
-    void addBoardGameToUserRentedHistory(long userId, long boardGameId) {
+    /*void addBoardGameToUserRentedHistory(long userId, long boardGameId) {
         customerRepository.getUser(userId)
                 .getRentedBoardGamesHistory()
                 .add(boardGameRepository.getBoardGame(boardGameId));
@@ -56,7 +56,7 @@ public class UserService {
         customerRepository.getUser(userId)
                 .getAtPresentRentedBoardGames()
                 .remove(boardGameRepository.getBoardGame(boardGameId));
-    }
+    }*/
 
 
 }

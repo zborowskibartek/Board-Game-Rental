@@ -17,10 +17,9 @@ public class RentHistory {
     public RentHistory() {
     }
 
-    public RentHistory(long userId, long gameId, LocalDateTime rentedDate, LocalDateTime returnedDate) {
+    public RentHistory(long userId, long gameId, LocalDateTime rentedDate) {
         this.userId = userId;
         this.gameId = gameId;
         this.rentedDate = rentedDate;
-        this.returnedDate = returnedDate;
     }
 }

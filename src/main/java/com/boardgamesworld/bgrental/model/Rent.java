@@ -11,6 +11,9 @@ public class Rent {
     private long gameId;
     private boolean gameRentStatus;
 
+    public Rent() {
+    }
+
     public Rent(long userId, long gameId, boolean gameRentStatus) {
         this.userId = userId;
         this.gameId = gameId;

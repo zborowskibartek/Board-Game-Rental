@@ -32,7 +32,7 @@ public class BoardGameController {
     }
 
     @GetMapping("/{boardGameId}")
-    public BoardGame getBoardGameById(@PathVariable long boardGameId) {
+    public BoardGame getBoardGameById(@PathVariable("boardGameId") long boardGameId) {
         return boardGameService.getBoardGame(boardGameId);
     }
 

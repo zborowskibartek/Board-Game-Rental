@@ -1,6 +1,6 @@
 package com.boardgamesworld.bgrental.controllers;
 
-import com.boardgamesworld.bgrental.services.UserRentalService;
+import com.boardgamesworld.bgrental.services.RentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UserRentalController {
 
-    private UserRentalService userRentalService;
+    private RentService userRentalService;
 
     @Autowired
-    public UserRentalController(UserRentalService userRentalService) {
+    public UserRentalController(RentService userRentalService) {
         this.userRentalService = userRentalService;
     }
 
-    @PostMapping("/rent")
+  /*  @PostMapping("/rent")
     public void rentBoardGame(@RequestParam long userId, @RequestParam long boardGameId) {
         userRentalService.rentBoardGame(userId, boardGameId);
     }
@@ -23,5 +23,5 @@ public class UserRentalController {
     @PostMapping("/return")
     public void returnBoardGame(@RequestParam long userId, @RequestParam long boardGameId) {
         userRentalService.returnBoardGame(userId, boardGameId);
-    }
+    }*/
 }

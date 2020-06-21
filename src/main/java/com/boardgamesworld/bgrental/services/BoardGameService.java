@@ -37,23 +37,4 @@ public class BoardGameService {
         boardGameRepository.deleteBoardGame(boardGameId);
     }
 
-    void changeBoardGameStatusAsRented(long boardGameId){
-        BoardGame boardGameToChangeStatus = getBoardGame(boardGameId);
-        if (!boardGameToChangeStatus.isRented()){
-            boardGameToChangeStatus.setRented(true);
-        } else {
-            throw new IllegalStateException("Board game is already rented! Choose another one.");
-        }
-    }
-
-    void changeBoardGameStatusAsReturned(long boardGameId){
-        BoardGame boardGameToChangeStatus = getBoardGame(boardGameId);
-        if (boardGameToChangeStatus.isRented()){
-            boardGameToChangeStatus.setRented(false);
-        } else {
-            throw new IllegalStateException("Board game is already returned! Choose another one.");
-        }
-    }
-
-
 }
