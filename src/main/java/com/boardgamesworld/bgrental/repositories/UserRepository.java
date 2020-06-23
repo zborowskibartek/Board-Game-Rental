@@ -1,10 +1,8 @@
 package com.boardgamesworld.bgrental.repositories;
 
-import com.boardgamesworld.bgrental.model.BoardGame;
 import com.boardgamesworld.bgrental.model.User;
 
 import java.util.List;
-import java.util.Set;
 
 public interface UserRepository {
 
