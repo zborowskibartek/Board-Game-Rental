@@ -10,11 +10,11 @@ import java.util.*;
 
 @Primary
 @Repository
-public class UserInMemoryRepository implements UserRepository {
+public class UserRepositoryInMemory implements UserRepository {
 
     private Map<Long, User> users;
 
-    public UserInMemoryRepository() {
+    public UserRepositoryInMemory() {
         users = new HashMap<>();
         createInitialUsers(users);
         }
@@ -36,9 +36,9 @@ public class UserInMemoryRepository implements UserRepository {
 
     @Override
     public void updateUser(long userIdToUpdate, User userWithUpdatedProperties) {
-        if (isUserInRepository(userIdToUpdate)) {
+       /* if (isUserInRepository(userIdToUpdate)) {
             updateUserProperties(getUser(userIdToUpdate), userWithUpdatedProperties);
-        }
+        }*/
     }
 
     @Override
@@ -48,27 +48,18 @@ public class UserInMemoryRepository implements UserRepository {
         }
     }
 
-
-
-
     private boolean isUserInRepository(long userId) {
         if (users.containsKey(userId)) {
             return true;
         }
-        throw new IllegalArgumentException("Wrong user ID. Can not find in repository!");
+        throw new IllegalStateException("Wrong user ID. Can not find in repository!");
     }
 
-    private void updateUserProperties(User userToUpdate, User userWithUpdatedProperties) {
-        if (userWithUpdatedProperties.getFirstName() != null) {
-            userToUpdate.setFirstName(userWithUpdatedProperties.getFirstName());
-        }
-        if (userWithUpdatedProperties.getSecondName() != null) {
-            userToUpdate.setSecondName(userWithUpdatedProperties.getSecondName());
-        }
-        if (userWithUpdatedProperties.getEmail() != null) {
-            userToUpdate.setEmail(userWithUpdatedProperties.getEmail());
-        }
-    }
+
+
+
+
+
 
     private static void createInitialUsers(Map users) {
         User user = new User(1, "Bartek", "Zboro",

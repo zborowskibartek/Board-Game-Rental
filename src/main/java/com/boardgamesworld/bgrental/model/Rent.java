@@ -9,14 +9,14 @@ public class Rent {
 
     private long userId;
     private long gameId;
-    private boolean gameRentStatus;
+    private boolean rented;
 
     public Rent() {
     }
 
-    public Rent(long userId, long gameId, boolean gameRentStatus) {
+    public Rent(long userId, long gameId, boolean rented) {
         this.userId = userId;
         this.gameId = gameId;
-        this.gameRentStatus = gameRentStatus;
+        this.rented = rented;
     }
 }

@@ -10,6 +10,10 @@ public interface RentHistoryRepository {
 
     void addRentHistory(RentHistory rentHistory);
 
+    RentHistory getRentHistoryByUserAndBoardGame(long userId, long boardGameId);
+
+    List<Long> getAllBoardGameIdsRentHistory();
+
     List<Long> getAllBoardGameIdsRentHistoryByUser(long userId);
 
 }

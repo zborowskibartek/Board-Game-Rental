@@ -10,18 +10,33 @@ import java.util.stream.Collectors;
 
 @Primary
 @Repository
-public class RentHistoryInMemoryRepository implements RentHistoryRepository {
+public class RentHistoryRepositoryInMemory implements RentHistoryRepository {
 
     private List<RentHistory> rentHistory;
 
     @Autowired
-    public RentHistoryInMemoryRepository(List<RentHistory> rentHistory) {
+    public RentHistoryRepositoryInMemory(List<RentHistory> rentHistory) {
         this.rentHistory = rentHistory;
     }
 
     @Override
     public void addRentHistory(RentHistory rentHistory) {
         this.rentHistory.add(rentHistory);
+    }
+
+    @Override
+    public RentHistory getRentHistoryByUserAndBoardGame(long userId, long boardGameId) {
+        return rentHistory.stream()
+                .filter(rentHistory -> rentHistory.getUserId() == userId & rentHistory.getGameId() == boardGameId)
+                .findFirst()
+                .get();
+    }
+
+    @Override
+    public List<Long> getAllBoardGameIdsRentHistory() {
+        return rentHistory.stream()
+                .map(RentHistory::getGameId)
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -12,12 +12,12 @@ import java.util.*;
 
 @Primary
 @Repository
-public class BoardGameInMemoryRepository implements BoardGameRepository {
+public class BoardGameRepositoryInMemory implements BoardGameRepository {
 
     private Map<Long, BoardGame> boardGames;
 
 
-    public BoardGameInMemoryRepository() {
+    public BoardGameRepositoryInMemory() {
         boardGames = new HashMap<>();
         createInitialBoardGames(boardGames);
     }

@@ -14,7 +14,6 @@ public class BoardGameController {
 
     private BoardGameService boardGameService;
 
-
     @Autowired
     public BoardGameController(BoardGameService boardGameService) {
         this.boardGameService = boardGameService;
@@ -36,15 +35,15 @@ public class BoardGameController {
         return boardGameService.getBoardGame(boardGameId);
     }
 
-    @PutMapping("/{boardGameId}")
-    @ResponseStatus(HttpStatus.OK)
-    public void updateBoardGame(@PathVariable long boardGameId, @RequestBody BoardGame boardGameWithUpdatedProperties) {
-        boardGameService.updateBoardGame(boardGameId, boardGameWithUpdatedProperties);
-    }
-
     @DeleteMapping("/{boardGameId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBoardGame(@PathVariable long boardGameId) {
         boardGameService.deleteBoardGame(boardGameId);
     }
+
+    /* @PutMapping("/{boardGameId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateBoardGame(@PathVariable long boardGameId, @RequestBody BoardGame boardGameWithUpdatedProperties) {
+        boardGameService.updateBoardGame(boardGameId, boardGameWithUpdatedProperties);
+    }*/
 }

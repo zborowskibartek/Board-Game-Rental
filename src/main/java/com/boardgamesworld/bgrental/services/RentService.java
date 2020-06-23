@@ -38,8 +38,15 @@ public class RentService {
         updateRentHistory(userId, boardGameId);
     }
 
-    public List<BoardGame> getAllBoardGameRentAtPresentByUser(long userId){
-        return rentRepository.getAllBoardGameIdsRentByUser(userId).stream()
+    public List<BoardGame> getAllBoardGameRentAtPresent() {
+        return rentRepository.getAllBoardGameIdsRentAtPresent().stream()
+                .map(boardGameId -> boardGameService.getBoardGame(boardGameId))
+                .filter(BoardGame::isRented)
+                .collect(Collectors.toList());
+    }
+
+    public List<BoardGame> getAllBoardGameRentAtPresentByUser(long userId) {
+        return rentRepository.getAllBoardGameIdsRentAtPresentByUser(userId).stream()
                 .map(boarGameId -> boardGameService.getBoardGame(boarGameId))
                 .filter(BoardGame::isRented)
                 .collect(Collectors.toList());
@@ -86,7 +93,8 @@ public class RentService {
     }
 
     private void updateRentHistory(long userId, long boardGameId) {
-        rentHistoryService.updateRentHistory(userId,boardGameId);
+        rentHistoryService.updateRentHistory(userId, boardGameId);
     }
+
 }
 

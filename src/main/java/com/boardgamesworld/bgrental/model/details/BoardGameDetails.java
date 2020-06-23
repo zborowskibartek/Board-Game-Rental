@@ -20,6 +20,7 @@ public class BoardGameDetails {
 
     public BoardGameDetails() {
 
+
     }
 
     public BoardGameDetails(String description) {
