@@ -2,7 +2,6 @@ package com.boardgamesworld.bgrental.services;
 
 import com.boardgamesworld.bgrental.model.BoardGame;
 import com.boardgamesworld.bgrental.model.RentHistory;
-import com.boardgamesworld.bgrental.repositories.RentHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
