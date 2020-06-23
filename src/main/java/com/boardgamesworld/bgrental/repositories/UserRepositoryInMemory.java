@@ -36,9 +36,7 @@ public class UserRepositoryInMemory implements UserRepository {
 
     @Override
     public void updateUser(long userIdToUpdate, User userWithUpdatedProperties) {
-       /* if (isUserInRepository(userIdToUpdate)) {
-            updateUserProperties(getUser(userIdToUpdate), userWithUpdatedProperties);
-        }*/
+        // todo
     }
 
     @Override
