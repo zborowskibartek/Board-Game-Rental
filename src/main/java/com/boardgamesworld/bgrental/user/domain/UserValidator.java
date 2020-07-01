@@ -8,12 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-@Service
 class UserValidator {
 
     private UserRepository userRepository;
 
-    @Autowired
     public UserValidator(UserRepository userRepository) {
         this.userRepository = userRepository;
     }

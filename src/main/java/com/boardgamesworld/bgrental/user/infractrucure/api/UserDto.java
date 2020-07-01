@@ -1,10 +1,14 @@
 package com.boardgamesworld.bgrental.user.infractrucure.api;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDto {
 
     private long userId;
@@ -14,20 +18,4 @@ public class UserDto {
     private String nick;
     private String password;
 
-    public UserDto() {
-    }
-
-    public UserDto(long userId,
-                   String firstName,
-                   String secondName,
-                   String email,
-                   String nick,
-                   String password) {
-        this.userId = userId;
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.email = email;
-        this.nick = nick;
-        this.password = password;
-    }
 }

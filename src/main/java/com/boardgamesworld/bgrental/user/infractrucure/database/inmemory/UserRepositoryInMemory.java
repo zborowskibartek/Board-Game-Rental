@@ -4,6 +4,7 @@ import com.boardgamesworld.bgrental.user.domain.User;
 import com.boardgamesworld.bgrental.user.domain.UserRepository;
 import org.springframework.stereotype.Repository;
 
+
 import java.util.*;
 
 @Repository
