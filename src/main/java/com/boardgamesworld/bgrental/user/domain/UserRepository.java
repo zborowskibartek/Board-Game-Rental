@@ -1,10 +1,9 @@
-package com.boardgamesworld.bgrental.repositories;
+package com.boardgamesworld.bgrental.user.domain;
 
-import com.boardgamesworld.bgrental.model.User;
 
 import java.util.List;
 
-public interface UserRepository {
+interface UserRepository {
 
     List<User> getAllUser();
 

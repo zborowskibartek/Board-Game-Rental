@@ -1,4 +1,4 @@
-package com.boardgamesworld.bgrental.services.exceptions;
+package com.boardgamesworld.bgrental.user.exceptions;
 
 import java.util.List;
 

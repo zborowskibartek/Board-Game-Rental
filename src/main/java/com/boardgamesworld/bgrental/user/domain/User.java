@@ -1,9 +1,9 @@
-package com.boardgamesworld.bgrental.model;
+package com.boardgamesworld.bgrental.user.domain;
 
 import lombok.Getter;
 
 @Getter
-public class User {
+class User {
 
     private long userId;
     private String firstName;
@@ -12,7 +12,7 @@ public class User {
     private String nick;
     private String password;
 
-    public User(long userId,
+     User(long userId,
                 String firstName,
                 String secondName,
                 String email,

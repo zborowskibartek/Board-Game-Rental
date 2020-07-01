@@ -1,12 +1,11 @@
-package com.boardgamesworld.bgrental.repositories;
+package com.boardgamesworld.bgrental.user.domain;
 
-import com.boardgamesworld.bgrental.model.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
 @Repository
-public class UserRepositoryInMemory implements UserRepository {
+class UserRepositoryInMemory implements UserRepository {
 
     private final Map<Long, User> users = new HashMap<>();
 

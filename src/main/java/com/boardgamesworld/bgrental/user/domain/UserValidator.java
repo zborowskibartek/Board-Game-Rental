@@ -1,22 +1,17 @@
-package com.boardgamesworld.bgrental.services;
+package com.boardgamesworld.bgrental.user.domain;
 
-import com.boardgamesworld.bgrental.model.User;
-import com.boardgamesworld.bgrental.repositories.UserRepository;
-import com.boardgamesworld.bgrental.services.exceptions.InvalidUserException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.boardgamesworld.bgrental.user.exceptions.InvalidUserException;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-@Service
-public class UserValidator {
+class UserValidator {
 
-    @Autowired
     private UserRepository userRepository;
 
-    public UserValidator(UserRepository userRepository) {
+    UserValidator(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
