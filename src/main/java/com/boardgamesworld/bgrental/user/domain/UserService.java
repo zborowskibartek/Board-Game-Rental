@@ -3,12 +3,12 @@ package com.boardgamesworld.bgrental.user.domain;
 
 import java.util.List;
 
-public class UserService {
+class UserService {
 
     private UserRepository userRepository;
     private UserValidator userValidator;
 
-    public UserService(UserRepository userRepository, UserValidator userValidator) {
+    UserService(UserRepository userRepository, UserValidator userValidator) {
         this.userRepository = userRepository;
         this.userValidator = userValidator;
     }

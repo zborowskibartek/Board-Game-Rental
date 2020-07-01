@@ -1,4 +1,4 @@
-package com.boardgamesworld.bgrental.user.infractrucure.database.inmemory;
+package com.boardgamesworld.bgrental.user.infrastructure.database.inmemory;
 
 import com.boardgamesworld.bgrental.user.domain.User;
 import com.boardgamesworld.bgrental.user.domain.UserRepository;

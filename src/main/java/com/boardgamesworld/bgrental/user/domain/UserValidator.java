@@ -1,9 +1,6 @@
 package com.boardgamesworld.bgrental.user.domain;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -12,7 +9,7 @@ class UserValidator {
 
     private UserRepository userRepository;
 
-    public UserValidator(UserRepository userRepository) {
+    UserValidator(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
