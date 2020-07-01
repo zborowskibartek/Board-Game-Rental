@@ -9,10 +9,19 @@ import java.util.regex.Pattern;
 
 class UserValidator {
 
-    private UserRepository userRepository;
+    private static UserValidator INSTANCE;
 
-    UserValidator(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    private UserRepository userRepository = UserRepositoryInMemory.getInstance();
+
+
+    private UserValidator() {
+    }
+
+    static UserValidator getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new UserValidator();
+        }
+        return INSTANCE;
     }
 
     void validateNewUser(User newUser) {

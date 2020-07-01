@@ -7,11 +7,8 @@ import java.util.List;
 
 public class UserFacade {
 
-    private UserService userService;
+    private UserService userService = UserService.getInstance();
 
-    public UserFacade(UserService userService) {
-        this.userService = userService;
-    }
 
     public List<UserDto> getAllUser() {
         List<User> users = userService.getAllUser();
