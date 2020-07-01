@@ -1,61 +1,34 @@
 package com.boardgamesworld.bgrental.user.domain;
 
-import com.boardgamesworld.bgrental.user.dto.UserDto;
 
-import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+
 import java.util.List;
 
+@Configuration
 public class UserFacade {
 
-    private UserService userService = UserService.getInstance();
+    private UserService userService;
 
-
-    public List<UserDto> getAllUser() {
-        List<User> users = userService.getAllUser();
-        List<UserDto> usersDto = new ArrayList<>();
-
-        users.forEach(user -> usersDto.add(
-                new UserDto(user.getUserId(),
-                        user.getFirstName(),
-                        user.getSecondName(),
-                        user.getEmail(),
-                        user.getNick(),
-                        user.getPassword())));
-
-        return usersDto;
+    @Autowired
+    public UserFacade(UserService userService) {
+        this.userService = userService;
     }
 
-    public UserDto getUser(long userId) {
-        User user = userService.getUser(userId);
-
-        return new UserDto(user.getUserId(),
-                user.getFirstName(),
-                user.getSecondName(),
-                user.getEmail(),
-                user.getNick(),
-                user.getPassword());
+    public List<User> getAllUser() {
+        return userService.getAllUser();
     }
 
-    public void addUser(UserDto userDto) {
-        User user = new User(userDto.getUserId(),
-                userDto.getFirstName(),
-                userDto.getSecondName(),
-                userDto.getEmail(),
-                userDto.getNick(),
-                userDto.getPassword());
+    public User getUser(long userId) {
+        return userService.getUser(userId);
+    }
 
+    public void addUser(User user) {
         userService.addUser(user);
     }
 
-    public void updateUser(long userId, UserDto updatedUserDto) {
-        User updatedUser = new User(
-                userId,
-                updatedUserDto.getFirstName(),
-                updatedUserDto.getSecondName(),
-                updatedUserDto.getEmail(),
-                updatedUserDto.getNick(),
-                updatedUserDto.getPassword());
-
+    public void updateUser(long userId, User updatedUser) {
         userService.updateUser(userId, updatedUser);
     }
 

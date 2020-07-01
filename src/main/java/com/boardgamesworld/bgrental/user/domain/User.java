@@ -3,7 +3,7 @@ package com.boardgamesworld.bgrental.user.domain;
 import lombok.Getter;
 
 @Getter
-class User {
+public class User {
 
     private long userId;
     private String firstName;
@@ -12,7 +12,7 @@ class User {
     private String nick;
     private String password;
 
-     User(long userId,
+    public User(long userId,
                 String firstName,
                 String secondName,
                 String email,

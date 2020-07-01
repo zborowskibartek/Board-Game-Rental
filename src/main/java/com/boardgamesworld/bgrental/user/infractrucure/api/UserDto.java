@@ -1,4 +1,4 @@
-package com.boardgamesworld.bgrental.user.dto;
+package com.boardgamesworld.bgrental.user.infractrucure.api;
 
 import lombok.Getter;
 import lombok.Setter;

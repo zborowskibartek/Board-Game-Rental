@@ -1,27 +1,21 @@
 package com.boardgamesworld.bgrental.user.domain;
 
-import com.boardgamesworld.bgrental.user.exceptions.InvalidUserException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+@Service
 class UserValidator {
 
-    private static UserValidator INSTANCE;
+    private UserRepository userRepository;
 
-    private UserRepository userRepository = UserRepositoryInMemory.getInstance();
-
-
-    private UserValidator() {
-    }
-
-    static UserValidator getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new UserValidator();
-        }
-        return INSTANCE;
+    @Autowired
+    public UserValidator(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     void validateNewUser(User newUser) {

@@ -1,4 +1,4 @@
-package com.boardgamesworld.bgrental.user.exceptions;
+package com.boardgamesworld.bgrental.user.domain;
 
 import java.util.List;
 

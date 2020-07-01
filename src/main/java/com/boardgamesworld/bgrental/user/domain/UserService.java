@@ -1,24 +1,22 @@
 package com.boardgamesworld.bgrental.user.domain;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
-class UserService {
+@Service
+public class UserService {
 
-    private static UserService INSTANCE;
-
-    private UserRepository userRepository = UserRepositoryInMemory.getInstance();
-    private UserValidator userValidator = UserValidator.getInstance();
+    private UserRepository userRepository;
+    private UserValidator userValidator;
 
 
-    private UserService() {
-    }
-
-    static UserService getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new UserService();
-        }
-        return INSTANCE;
+    @Autowired
+    public UserService(UserRepository userRepository, UserValidator userValidator) {
+        this.userRepository = userRepository;
+        this.userValidator = userValidator;
     }
 
     List<User> getAllUser() {

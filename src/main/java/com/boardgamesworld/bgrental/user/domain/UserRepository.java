@@ -3,7 +3,7 @@ package com.boardgamesworld.bgrental.user.domain;
 
 import java.util.List;
 
-interface UserRepository {
+public interface UserRepository {
 
     List<User> getAllUser();
 
