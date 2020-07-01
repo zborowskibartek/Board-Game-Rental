@@ -11,12 +11,12 @@ import java.util.List;
 public class UserService {
 
     private UserRepository userRepository;
-    private UserValidatorService userValidatorService;
+    private UserValidator userValidator;
 
     @Autowired
-    public UserService(UserRepository userRepository, UserValidatorService userValidatorService) {
+    public UserService(UserRepository userRepository, UserValidator userValidator) {
         this.userRepository = userRepository;
-        this.userValidatorService = userValidatorService;
+        this.userValidator = userValidator;
     }
 
     public List<User> getAllUser() {
@@ -28,12 +28,13 @@ public class UserService {
     }
 
     public void addUser(User user) {
-        userValidatorService.isUserValid(user);
+        userValidator.validateNewUser(user);
         userRepository.addUser(user);
     }
 
-    public void updateUser(long userIdToUpdate, User userWithUpdatedProperties) {
-        userRepository.updateUser(userIdToUpdate, userWithUpdatedProperties);
+    public void updateUser(long userId, User updatedUser) {
+        userValidator.validateUpdatedUser(updatedUser);
+        userRepository.updateUser(userId, updatedUser);
     }
 
     public void deleteUser(long userId) {

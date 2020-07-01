@@ -1,9 +1,11 @@
 package com.boardgamesworld.bgrental.model;
 
 import lombok.Getter;
+import lombok.Setter;
 
+@Setter
 @Getter
-public class User {
+public class UserDto {
 
     private long userId;
     private String firstName;
@@ -12,12 +14,15 @@ public class User {
     private String nick;
     private String password;
 
-    public User(long userId,
-                String firstName,
-                String secondName,
-                String email,
-                String nick,
-                String password) {
+    public UserDto() {
+    }
+
+    public UserDto(long userId,
+                   String firstName,
+                   String secondName,
+                   String email,
+                   String nick,
+                   String password) {
         this.userId = userId;
         this.firstName = firstName;
         this.secondName = secondName;
