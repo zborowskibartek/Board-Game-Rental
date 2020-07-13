@@ -1,13 +1,17 @@
-package com.boardgamesworld.bgrental.boardgame.domain;
+package com.boardgamesworld.bgrental.boardgame.infrastructure.api;
 
+import com.boardgamesworld.bgrental.boardgame.domain.BoardGameCondition;
+import com.boardgamesworld.bgrental.boardgame.domain.BoardGameDetails;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardGame {
+public class BoardGameDto {
 
     private long boardGameId;
     private String name;
@@ -15,4 +19,5 @@ public class BoardGame {
     private boolean rented = false;
     private BoardGameCondition condition;
     private BoardGameDetails details;
+
 }

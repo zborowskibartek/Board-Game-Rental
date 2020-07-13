@@ -1,9 +1,10 @@
 package com.boardgamesworld.bgrental.user.infractrucure.api;
 
+import com.boardgamesworld.bgrental.user.domain.InvalidUserException;
 import com.boardgamesworld.bgrental.user.domain.User;
 import com.boardgamesworld.bgrental.user.domain.UserFacade;
-import com.boardgamesworld.bgrental.user.domain.InvalidUserException;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,13 +12,14 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
     private UserFacade userFacade;
+    private Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @Autowired
     public UserController(UserFacade userFacade) {
         this.userFacade = userFacade;
     }
@@ -50,6 +52,7 @@ public class UserController {
 
             userFacade.addUser(user);
             URI uri = URI.create("/users/" + user.getUserId());
+            logger.info("Add new user!");
 
             return ResponseEntity.created(uri).build();
         } catch (InvalidUserException exception) {
@@ -97,6 +100,8 @@ public class UserController {
 
                 userFacade.updateUser(userId, updatedUser);
                 URI uri = URI.create("/users/" + userId);
+                logger.info("Updated user " + userId + "!");
+
 
                 return ResponseEntity.created(uri).build();
             } catch (InvalidUserException exception) {
