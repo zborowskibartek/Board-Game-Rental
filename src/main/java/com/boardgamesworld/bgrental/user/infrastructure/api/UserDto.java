@@ -1,4 +1,4 @@
-package com.boardgamesworld.bgrental.user.infractrucure.api;
+package com.boardgamesworld.bgrental.user.infrastructure.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

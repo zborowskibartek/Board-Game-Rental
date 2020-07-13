@@ -31,4 +31,5 @@ public class UserFacade {
     public void deleteUser(long userId) {
         userService.deleteUser(userId);
     }
+    
 }
