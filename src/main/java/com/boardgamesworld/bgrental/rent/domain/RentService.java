@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
-public class RentService {
+class RentService {
 
 
     private final RentRepository rentRepository;
