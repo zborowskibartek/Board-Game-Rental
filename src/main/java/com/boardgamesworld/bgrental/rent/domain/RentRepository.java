@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface RentRepository {
 
+
     void addRent(Rent rent);
 
     List<Long> getAllRentBoardGameIds();

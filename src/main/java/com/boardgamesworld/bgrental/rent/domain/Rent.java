@@ -12,6 +12,7 @@ public class Rent {
     private final long userId;
     private final long gameId;
     private final LocalDateTime rentedDate;
-    private final LocalDateTime returnedDate = null;
+    private LocalDateTime returnedDate;
+
 
 }
