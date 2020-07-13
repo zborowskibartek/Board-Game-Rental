@@ -13,7 +13,7 @@ class RentFacadeConfiguration {
                           BoardGameFacade boardGameFacade,
                           UserFacade userFacade) {
         RentValidator rentValidator = new RentValidator(boardGameFacade, userFacade);
-        RentService rentService = new RentService(rentRepository, rentValidator);
+        RentService rentService = new RentService(rentRepository, rentValidator, boardGameFacade);
 
         return new RentFacade(rentService);
     }

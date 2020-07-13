@@ -1,6 +1,8 @@
 package com.boardgamesworld.bgrental.rent.domain;
 
+import com.boardgamesworld.bgrental.boardgame.domain.BoardGame;
 import com.boardgamesworld.bgrental.boardgame.domain.BoardGameFacade;
+import com.boardgamesworld.bgrental.user.domain.User;
 import com.boardgamesworld.bgrental.user.domain.UserFacade;
 import lombok.AllArgsConstructor;
 
@@ -13,20 +15,37 @@ class RentValidator {
     private final BoardGameFacade boardGameFacade;
     private final UserFacade userFacade;
 
-    boolean validateRent(long boardGameId, long userId) {
+    void validateRent(long boardGameId, long userId) {
         List<String> errors = new ArrayList<>();
-        if (boardGameFacade.getBoardGame(boardGameId) == null) {
+        BoardGame boardGame = boardGameFacade.getBoardGame(boardGameId);
+        User user = userFacade.getUser(userId);
+
+        if (boardGame == null) {
             errors.add("Board game do not exist! Choose another one!");
         }
-        if (boardGameFacade.getBoardGame(boardGameId).isRented()) {
+        if (boardGame != null && boardGame.isRented()) {
             errors.add("Board game is rented! Choose another one!");
         }
-        if (userFacade.getUser(userId) == null) {
+        if (user == null) {
             errors.add("User do not exist! Choose another one!");
         }
         if (errors.size() > 0) {
             throw new InvalidRentException(errors);
         }
-        return true;
+    }
+
+    void validateReturn(long boardGameId) {
+        List<String> errors = new ArrayList<>();
+        BoardGame boardGame = boardGameFacade.getBoardGame(boardGameId);
+
+        if (boardGame == null) {
+            errors.add("Board game do not exist! Choose another one!");
+        }
+        if (boardGame != null && !boardGame.isRented()) {
+            errors.add("Board game is already returned! Choose another one!");
+        }
+        if (errors.size() > 0) {
+            throw new InvalidRentException(errors);
+        }
     }
 }

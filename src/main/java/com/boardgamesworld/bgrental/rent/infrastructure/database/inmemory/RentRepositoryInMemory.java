@@ -14,22 +14,30 @@ public class RentRepositoryInMemory implements RentRepository {
     private final List<Rent> rents = new ArrayList<>();
 
     @Override
-    public Rent getRent(long boardGameId) {
-        return rents.stream()
-                .filter(rent -> rent.getGameId() == boardGameId && rent.getReturnedDate() == null)
-                .findAny()
-                .get();
-    }
-
-    @Override
     public void addRent(Rent rent) {
         rents.add(rent);
     }
 
     @Override
+    public void removeRent(long boardGameId) {
+        rents.removeIf(rent -> rent.getGameId() == boardGameId);
+    }
+
+    @Override
+    public List<Rent> getAllRents() {
+        return rents;
+    }
+
+    @Override
+    public List<Rent> getAllRentsByUser(long userId) {
+        return rents.stream()
+                .filter(rent -> rent.getUserId() == userId)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<Long> getAllRentBoardGameIds() {
         return rents.stream()
-                .filter(rent -> rent.getReturnedDate() == null)
                 .map(Rent::getGameId)
                 .collect(Collectors.toList());
     }
@@ -37,7 +45,7 @@ public class RentRepositoryInMemory implements RentRepository {
     @Override
     public List<Long> getAllRentBoardGameIdsByUser(long userId) {
         return rents.stream()
-                .filter(rent -> rent.getUserId() == userId && rent.getReturnedDate() == null)
+                .filter(rent -> rent.getUserId() == userId)
                 .map(Rent::getGameId)
                 .collect(Collectors.toList());
     }

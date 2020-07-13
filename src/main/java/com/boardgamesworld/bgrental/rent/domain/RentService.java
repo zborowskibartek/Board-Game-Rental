@@ -1,8 +1,11 @@
 package com.boardgamesworld.bgrental.rent.domain;
 
+import com.boardgamesworld.bgrental.boardgame.domain.BoardGame;
+import com.boardgamesworld.bgrental.boardgame.domain.BoardGameFacade;
 import lombok.AllArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 class RentService {
@@ -10,20 +13,74 @@ class RentService {
 
     private final RentRepository rentRepository;
     private final RentValidator rentValidator;
-
+    private final BoardGameFacade boardGameFacade;
 
     void rentBoardGame(long boardGameId, long userId) {
         rentValidator.validateRent(boardGameId, userId);
-        rentRepository.addRent(new Rent(userId, boardGameId, LocalDateTime.now(), null));
+        addRentToRepository(boardGameId, userId);
+        changeBoardGameStatusAsRented(boardGameId);
     }
 
     void returnBoardGame(long boardGameId) {
-        Rent rent = rentRepository.getRent(boardGameId);
-        rentRepository.addRent(
-                new Rent(rent.getUserId(),
-                        rent.getGameId(),
-                        rent.getRentedDate(),
-                        LocalDateTime.now()));
+        rentValidator.validateReturn(boardGameId);
+        removeRentFromRepository(boardGameId);
+        changeBoardGameStatusAsReturned(boardGameId);
     }
 
+    List<Rent> getAllRents() {
+        return rentRepository.getAllRents();
+    }
+
+    List<Rent> getAllRentsByUser(long userId) {
+        return rentRepository.getAllRentsByUser(userId);
+    }
+
+    List<BoardGame> getAllRentBoardGames() {
+        List<BoardGame> boardGames = new ArrayList<>();
+        rentRepository.getAllRentBoardGameIds()
+                .forEach(boardGameId -> {
+                    boardGames.add(boardGameFacade.getBoardGame(boardGameId));
+                });
+
+        return boardGames;
+    }
+
+    List<BoardGame> getAllRentBoardGamesByUser(long userId) {
+        List<BoardGame> boardGames = new ArrayList<>();
+        rentRepository.getAllRentBoardGameIdsByUser(userId)
+                .forEach(boardGameId -> {
+                    boardGames.add(boardGameFacade.getBoardGame(boardGameId));
+                });
+
+        return boardGames;
+    }
+
+    private void removeRentFromRepository(long boardGameId) {
+        rentRepository.removeRent(boardGameId);
+    }
+
+    private void addRentToRepository(long boardGameId, long userId) {
+        Rent rent = new Rent(boardGameId, userId);
+        rentRepository.addRent(rent);
+    }
+
+    private void changeBoardGameStatusAsRented(long boardGameId) {
+        setBoardGameRentStatus(boardGameId, true);
+    }
+
+    private void changeBoardGameStatusAsReturned(long boardGameId) {
+        setBoardGameRentStatus(boardGameId, false);
+    }
+
+    private void setBoardGameRentStatus(long boardGameId, boolean rented) {
+        BoardGame boardGame = boardGameFacade.getBoardGame(boardGameId);
+
+        boardGameFacade.updateBoardGame(boardGameId,
+                new BoardGame(boardGameId,
+                        boardGame.getName(),
+                        boardGame.getPricePerDay(),
+                        rented,
+                        boardGame.getCondition(),
+                        boardGame.getDetails()));
+    }
 }

@@ -9,4 +9,8 @@ public class InvalidRentException extends RuntimeException {
     public InvalidRentException(List<String> rentExceptions) {
         this.rentExceptions = rentExceptions;
     }
+
+    public List<String> getRentExceptions() {
+        return rentExceptions;
+    }
 }

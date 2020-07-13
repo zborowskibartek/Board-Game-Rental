@@ -28,7 +28,6 @@ public class BoardGameController {
         List<BoardGame> boardGames = boardGameFacade.getAllBoardGames();
         List<BoardGameDto> boardGamesDto;
 
-        if (boardGames != null) {
             boardGamesDto = boardGames.stream()
                     .map(boardGame -> new BoardGameDto(
                             boardGame.getBoardGameId(),
@@ -40,10 +39,7 @@ public class BoardGameController {
                     ))
                     .collect(Collectors.toList());
 
-            return ResponseEntity.ok().body(boardGamesDto);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+            return ResponseEntity.ok(boardGamesDto);
     }
 
     @PostMapping
