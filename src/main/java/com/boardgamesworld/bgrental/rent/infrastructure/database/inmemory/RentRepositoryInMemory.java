@@ -12,6 +12,14 @@ public class RentRepositoryInMemory implements RentRepository {
     private final List<Rent> rents = new ArrayList<>();
 
     @Override
+    public Rent getRent(long boardGameId) {
+        return rents.stream()
+                .filter(rent -> rent.getGameId() == boardGameId && rent.getReturnedDate() == null)
+                .findAny()
+                .get();
+    }
+
+    @Override
     public void addRent(Rent rent) {
         rents.add(rent);
     }

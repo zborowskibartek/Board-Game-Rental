@@ -17,6 +17,8 @@ public class RentService {
         rentRepository.addRent(new Rent(userId, boardGameId, LocalDateTime.now(), null));
     }
 
-
+    void returnBoardGame(long boardGameId, long userId) {
+        rentRepository.getAllRentBoardGameIdsByUser(userId);
+    }
 
 }
