@@ -1,7 +1,10 @@
 package com.boardgamesworld.bgrental.renthistory.domain;
 
+import lombok.AllArgsConstructor;
+
 import java.util.List;
 
+@AllArgsConstructor
 public class RentHistoryFacade {
 
     private RentHistoryService rentHistoryService;
