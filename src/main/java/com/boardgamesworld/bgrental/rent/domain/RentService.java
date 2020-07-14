@@ -2,6 +2,8 @@ package com.boardgamesworld.bgrental.rent.domain;
 
 import com.boardgamesworld.bgrental.boardgame.domain.BoardGame;
 import com.boardgamesworld.bgrental.boardgame.domain.BoardGameFacade;
+import com.boardgamesworld.bgrental.renthistory.domain.RentHistory;
+import com.boardgamesworld.bgrental.renthistory.domain.RentHistoryService;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;
