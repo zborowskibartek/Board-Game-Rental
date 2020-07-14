@@ -19,16 +19,16 @@ public class BoardGameSortController {
 
     private final BoardGameSortFacade boardGameSortFacade;
 
-    @GetMapping(value = "/sort", params = "sortBy")
-    public ResponseEntity<List<BoardGame>> getSortedBoardGames(@RequestParam String sortBy) {
+    @GetMapping(params = {"sort", "order"})
+    public ResponseEntity<List<BoardGame>> getSortedBoardGames(@RequestParam String sort, @RequestParam String order) {
         try {
-            switch (sortBy) {
+            switch (sort) {
                 case "name":
-                    return ResponseEntity.ok(boardGameSortFacade.getSortedBoardGamesByName());
+                    return ResponseEntity.ok(boardGameSortFacade.getSortedBoardGamesByName(order));
                 case "price":
-                    return ResponseEntity.ok(boardGameSortFacade.getSortedBoardGamesByPrice());
+                    return ResponseEntity.ok(boardGameSortFacade.getSortedBoardGamesByPrice(order));
                 default:
-                    throw new InvalidSortException("Try with: \"name\" or \"price\"");
+                    throw new InvalidSortException("Try with: \"name\" or \"price\" as a sort parameter!");
             }
         } catch (InvalidSortException exception) {
             return ResponseEntity.unprocessableEntity().header("Error", exception.getMessage()).build();

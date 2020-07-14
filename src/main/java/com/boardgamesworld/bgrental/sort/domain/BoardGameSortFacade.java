@@ -10,12 +10,12 @@ public class BoardGameSortFacade {
 
     private BoardGameSortService boardGameSortService;
 
-    public List<BoardGame> getSortedBoardGamesByName() {
-        return boardGameSortService.getSortedBoardGamesByName();
+    public List<BoardGame> getSortedBoardGamesByName(String order) {
+        return boardGameSortService.getSortedBoardGamesByName(order);
     }
 
-    public List<BoardGame> getSortedBoardGamesByPrice() {
-        return boardGameSortService.getSortedBoardGamesByPrice();
+    public List<BoardGame> getSortedBoardGamesByPrice(String order) {
+        return boardGameSortService.getSortedBoardGamesByPrice(order);
     }
 
 }

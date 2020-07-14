@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface BoardGameSort {
 
-    List<BoardGame> getSortedBoardGamesByName();
+    List<BoardGame> getSortedBoardGamesByName(String order);
 
-    List<BoardGame> getSortedBoardGamesByPrice();
+    List<BoardGame> getSortedBoardGamesByPrice(String order);
 
 }
