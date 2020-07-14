@@ -18,6 +18,13 @@ public class RentRepositoryInMemory implements RentRepository {
         rents.add(rent);
     }
 
+    public Rent getRent(long boardGameId){
+        return rents.stream()
+                .filter(rent -> rent.getGameId() == boardGameId )
+                .findFirst()
+                .get();
+    }
+
     @Override
     public void removeRent(long boardGameId) {
         rents.removeIf(rent -> rent.getGameId() == boardGameId);

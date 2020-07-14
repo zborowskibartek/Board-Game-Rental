@@ -6,6 +6,8 @@ public interface RentRepository {
 
     void addRent(Rent rent);
 
+    Rent getRent(long boardGameId);
+
     void removeRent(long boardGameId);
 
     List<Rent> getAllRents();

@@ -3,7 +3,7 @@ package com.boardgamesworld.bgrental.rent.domain;
 import com.boardgamesworld.bgrental.boardgame.domain.BoardGame;
 import com.boardgamesworld.bgrental.boardgame.domain.BoardGameFacade;
 import com.boardgamesworld.bgrental.renthistory.domain.RentHistory;
-import com.boardgamesworld.bgrental.renthistory.domain.RentHistoryService;
+import com.boardgamesworld.bgrental.renthistory.domain.RentHistoryFacade;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -17,6 +17,7 @@ class RentService {
     private final RentRepository rentRepository;
     private final RentValidator rentValidator;
     private final BoardGameFacade boardGameFacade;
+    private final RentHistoryFacade rentHistoryFacade;
 
     void rentBoardGame(long boardGameId, long userId) {
         rentValidator.validateRent(boardGameId, userId);
@@ -26,7 +27,8 @@ class RentService {
 
     void returnBoardGame(long boardGameId) {
         rentValidator.validateReturn(boardGameId);
-        removeRentFromRepository(boardGameId);
+        moveRentToRentHistoryRepository(boardGameId);
+        removeRentFromRentRepository(boardGameId);
         changeBoardGameStatusAsReturned(boardGameId);
     }
 
@@ -58,7 +60,7 @@ class RentService {
         return boardGames;
     }
 
-    private void removeRentFromRepository(long boardGameId) {
+    private void removeRentFromRentRepository(long boardGameId) {
         rentRepository.removeRent(boardGameId);
     }
 
@@ -85,5 +87,14 @@ class RentService {
                         rented,
                         boardGame.getCondition(),
                         boardGame.getDetails()));
+    }
+
+    private void moveRentToRentHistoryRepository(long boardGameId) {
+        Rent rent = rentRepository.getRent(boardGameId);
+        rentHistoryFacade.addRentHistory(
+                new RentHistory(rent.getUserId(),
+                        rent.getGameId(),
+                        rent.getRentedDate(),
+                        LocalDateTime.now()));
     }
 }
