@@ -2,11 +2,13 @@ package com.boardgamesworld.bgrental.renthistory.infrastructure.database.inmemor
 
 import com.boardgamesworld.bgrental.renthistory.domain.RentHistory;
 import com.boardgamesworld.bgrental.renthistory.domain.RentHistoryRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Repository
 public class RentHistoryRepositoryInMemory implements RentHistoryRepository {
 
     private final List<RentHistory> rentHistories = new ArrayList<>();
