@@ -5,10 +5,7 @@ import com.boardgamesworld.bgrental.renthistory.domain.RentHistoryDto;
 import com.boardgamesworld.bgrental.renthistory.domain.RentHistoryFacade;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,27 +23,27 @@ public class RentHistoryController {
         List<RentHistoryDto> rentHistoryDto;
 
         rentHistoryDto = rentHistory.stream()
-                .map(rentHis -> new RentHistoryDto(
-                        rentHis.getUserId(),
-                        rentHis.getGameId(),
-                        rentHis.getRentedDate(),
-                        rentHis.getReturnedDate()))
+                .map(rent -> new RentHistoryDto(
+                        rent.getUserId(),
+                        rent.getGameId(),
+                        rent.getRentedDate(),
+                        rent.getReturnedDate()))
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(rentHistoryDto);
     }
 
-    @GetMapping("/history/{userId}")
-    public ResponseEntity<List<RentHistoryDto>> getAllRentHistoryByUser(@PathVariable long userId) {
+    @GetMapping(value = "/history", params = "userId")
+    public ResponseEntity<List<RentHistoryDto>> getAllRentHistoryByUser(@RequestParam long userId) {
         List<RentHistory> rentHistory = rentHistoryFacade.getAllRentHistoryByUser(userId);
         List<RentHistoryDto> rentHistoryDto;
 
         rentHistoryDto = rentHistory.stream()
-                .map(rentHis -> new RentHistoryDto(
-                        rentHis.getUserId(),
-                        rentHis.getGameId(),
-                        rentHis.getRentedDate(),
-                        rentHis.getReturnedDate()))
+                .map(rent -> new RentHistoryDto(
+                        rent.getUserId(),
+                        rent.getGameId(),
+                        rent.getRentedDate(),
+                        rent.getReturnedDate()))
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(rentHistoryDto);

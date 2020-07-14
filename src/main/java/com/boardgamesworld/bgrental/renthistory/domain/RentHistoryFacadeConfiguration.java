@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Configuration;
 public class RentHistoryFacadeConfiguration {
 
     @Bean
-    RentHistoryFacade rentHistoryFacade(RentHistoryRepository rentHistoryRepository){
+    RentHistoryFacade rentHistoryFacade(RentHistoryRepository rentHistoryRepository) {
         RentHistoryService rentHistoryService = new RentHistoryService(rentHistoryRepository);
 
-        return new RentHistoryFacade(rentHistoryService );
+        return new RentHistoryFacade(rentHistoryService);
     }
 }

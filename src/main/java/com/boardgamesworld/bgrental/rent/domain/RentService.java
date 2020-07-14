@@ -28,7 +28,7 @@ class RentService {
     void returnBoardGame(long boardGameId) {
         rentValidator.validateReturn(boardGameId);
         moveRentToRentHistoryRepository(boardGameId);
-        removeRentFromRentRepository(boardGameId);
+        removeRentFromRepository(boardGameId);
         changeBoardGameStatusAsReturned(boardGameId);
     }
 
@@ -60,7 +60,7 @@ class RentService {
         return boardGames;
     }
 
-    private void removeRentFromRentRepository(long boardGameId) {
+    private void removeRentFromRepository(long boardGameId) {
         rentRepository.removeRent(boardGameId);
     }
 

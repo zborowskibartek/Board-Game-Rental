@@ -26,6 +26,31 @@ public class RentController {
         this.rentFacade = rentFacade;
     }
 
+    @PostMapping("/rent")
+    public ResponseEntity rentBoardGame(@RequestParam long boardGameId, @RequestParam long userId) {
+        try {
+            rentFacade.rentBoardGame(boardGameId, userId);
+            URI uri = URI.create("/rent/" + boardGameId);
+            logger.info("Rent board game!");
+
+            return ResponseEntity.created(uri).build();
+        } catch (InvalidRentException exception) {
+            return ResponseEntity.badRequest().body(exception.getRentExceptions());
+        }
+    }
+
+    @PutMapping("/return")
+    public ResponseEntity returnBoardGame(@RequestParam long boardGameId) {
+        try {
+            rentFacade.returnBoardGame(boardGameId);
+            logger.info("Returned board game!");
+
+            return ResponseEntity.ok().build();
+        } catch (InvalidRentException exception) {
+            return ResponseEntity.badRequest().body(exception.getRentExceptions());
+        }
+    }
+
     @GetMapping("/rents")
     public ResponseEntity<List<RentDto>> getAllRents() {
         List<Rent> rents = rentFacade.getAllRents();
@@ -38,8 +63,8 @@ public class RentController {
         return ResponseEntity.ok(rentsDto);
     }
 
-    @GetMapping("/rents/{userId}")
-    public ResponseEntity<List<RentDto>> getAllRentsByUser(@PathVariable long userId) {
+    @GetMapping(value = "/rents", params = "userId")
+    public ResponseEntity<List<RentDto>> getAllRentsByUser(@RequestParam long userId) {
         List<Rent> rents = rentFacade.getAllRentsByUser(userId);
         List<RentDto> rentsDto;
 
@@ -69,8 +94,8 @@ public class RentController {
         return ResponseEntity.ok(boardGamesDto);
     }
 
-    @GetMapping("/rents/boardgames/{userId}")
-    public ResponseEntity<List<BoardGameDto>> getAllRentBoardGamesByUser(@PathVariable long userId) {
+    @GetMapping(value = "/rents/boardgames", params = "userId")
+    public ResponseEntity<List<BoardGameDto>> getAllRentBoardGamesByUser(@RequestParam long userId) {
         List<BoardGame> boardGames = rentFacade.getAllRentBoardGamesByUser(userId);
         List<BoardGameDto> boardGamesDto;
 
@@ -86,30 +111,5 @@ public class RentController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(boardGamesDto);
-    }
-
-    @PostMapping("/rent")
-    public ResponseEntity rentBoardGame(@RequestParam long boardGameId, @RequestParam long userId) {
-        try {
-            rentFacade.rentBoardGame(boardGameId, userId);
-            URI uri = URI.create("/rent/" + boardGameId);
-            logger.info("Rent board game!");
-
-            return ResponseEntity.created(uri).build();
-        } catch (InvalidRentException exception) {
-            return ResponseEntity.badRequest().body(exception.getRentExceptions());
-        }
-    }
-
-    @PutMapping("/return")
-    public ResponseEntity returnBoardGame(@RequestParam long boardGameId) {
-        try {
-            rentFacade.returnBoardGame(boardGameId);
-            logger.info("Returned board game!");
-
-            return ResponseEntity.ok().build();
-        } catch (InvalidRentException exception) {
-            return ResponseEntity.badRequest().body(exception.getRentExceptions());
-        }
     }
 }
