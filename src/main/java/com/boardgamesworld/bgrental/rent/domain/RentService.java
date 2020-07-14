@@ -4,6 +4,7 @@ import com.boardgamesworld.bgrental.boardgame.domain.BoardGame;
 import com.boardgamesworld.bgrental.boardgame.domain.BoardGameFacade;
 import lombok.AllArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +61,7 @@ class RentService {
     }
 
     private void addRentToRepository(long boardGameId, long userId) {
-        Rent rent = new Rent(boardGameId, userId);
+        Rent rent = new Rent(boardGameId, userId, LocalDateTime.now());
         rentRepository.addRent(rent);
     }
 
