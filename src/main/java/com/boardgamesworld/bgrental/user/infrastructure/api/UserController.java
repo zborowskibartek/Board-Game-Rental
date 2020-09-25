@@ -24,7 +24,7 @@ public class UserController {
     }
 
     @GetMapping
-    public List<UserDto> getAllUser() {
+    public ResponseEntity<List<UserDto>> getAllUser() {
         List<User> users = userFacade.getAllUser();
         List<UserDto> usersDto = new ArrayList<>();
 
@@ -36,7 +36,7 @@ public class UserController {
                         user.getNick(),
                         user.getPassword())));
 
-        return usersDto;
+        return ResponseEntity.ok(usersDto);
     }
 
     @PostMapping

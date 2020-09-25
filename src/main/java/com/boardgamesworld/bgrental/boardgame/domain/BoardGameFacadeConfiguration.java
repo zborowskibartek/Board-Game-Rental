@@ -15,5 +15,4 @@ class BoardGameFacadeConfiguration {
 
         return new BoardGameFacade(boardGameService);
     }
-
 }
