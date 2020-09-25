@@ -14,6 +14,8 @@ class BoardGameFacadeConfiguration {
         BoardGameService boardGameService = new BoardGameService(boardGameRepository, boardGameValidator);
 
         return new BoardGameFacade(boardGameService);
+
     }
 
+    //test
 }
