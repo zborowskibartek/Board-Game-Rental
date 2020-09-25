@@ -16,7 +16,7 @@ public class BoardGameDto {
     private long boardGameId;
     private String name;
     private double pricePerDay;
-    private boolean rented = false;
+    private boolean rented;
     private BoardGameCondition condition;
     private BoardGameDetails details;
 
