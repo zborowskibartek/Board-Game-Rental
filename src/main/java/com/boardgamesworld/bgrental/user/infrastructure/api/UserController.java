@@ -3,22 +3,14 @@ package com.boardgamesworld.bgrental.user.infrastructure.api;
 import com.boardgamesworld.bgrental.user.domain.InvalidUserException;
 import com.boardgamesworld.bgrental.user.domain.User;
 import com.boardgamesworld.bgrental.user.domain.UserFacade;
-<<<<<<< HEAD:src/main/java/com/boardgamesworld/bgrental/user/infrastructure/api/UserController.java
-import com.boardgamesworld.bgrental.user.domain.InvalidUserException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-=======
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
->>>>>>> feature-boardgame:src/main/java/com/boardgamesworld/bgrental/user/infractrucure/api/UserController.java
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-
 
 @RestController
 @RequestMapping("/users")
