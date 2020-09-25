@@ -1,7 +1,6 @@
-package com.boardgamesworld.bgrental.model;
+package com.boardgamesworld.bgrental.boardgame.domain;
 
-public enum BoardGameCategory {
-
+enum BoardGameCategory {
     FAMILY,
     PARTY,
     ECONOMIC,
@@ -11,6 +10,4 @@ public enum BoardGameCategory {
     COOPERATIVE,
     LOGIC,
     FANTASY;
-
-
 }

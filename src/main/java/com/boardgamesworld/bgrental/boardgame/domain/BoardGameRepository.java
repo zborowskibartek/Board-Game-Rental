@@ -1,6 +1,4 @@
-package com.boardgamesworld.bgrental.repositories.interfaces;
-
-import com.boardgamesworld.bgrental.model.BoardGame;
+package com.boardgamesworld.bgrental.boardgame.domain;
 
 import java.util.List;
 
@@ -15,6 +13,5 @@ public interface BoardGameRepository {
     void updateBoardGame(long boardGameId, BoardGame updatedBoardGame);
 
     void deleteBoardGame(long boardGameId);
-
 
 }
