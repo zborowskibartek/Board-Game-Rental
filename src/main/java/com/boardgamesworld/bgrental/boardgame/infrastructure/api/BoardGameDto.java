@@ -2,6 +2,7 @@ package com.boardgamesworld.bgrental.boardgame.infrastructure.api;
 
 import com.boardgamesworld.bgrental.boardgame.domain.BoardGameCondition;
 import com.boardgamesworld.bgrental.boardgame.domain.BoardGameDetails;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

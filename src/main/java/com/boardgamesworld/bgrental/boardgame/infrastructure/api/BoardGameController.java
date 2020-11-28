@@ -14,107 +14,70 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/boardgames")
-public class BoardGameController {
+public class  BoardGameController {
 
-    private BoardGameFacade boardGameFacade;
-    private Logger logger = LoggerFactory.getLogger(BoardGameController.class);
+    private final BoardGameFacade boardGameFacade;
+    private final Logger logger = LoggerFactory.getLogger(BoardGameController.class);
 
     public BoardGameController(BoardGameFacade boardGameFacade) {
         this.boardGameFacade = boardGameFacade;
     }
 
     @GetMapping
-    public ResponseEntity<List<BoardGameDto>> getAllBoardGames() {
+    public ResponseEntity<BoardGameResponse> getAllBoardGames() {
         List<BoardGame> boardGames = boardGameFacade.getAllBoardGames();
-        List<BoardGameDto> boardGamesDto;
+        List<BoardGameDto> boardGamesDto = boardGames.stream()
+                .map(BoardGameMapper::toDto)
+                .collect(Collectors.toList());
 
-            boardGamesDto = boardGames.stream()
-                    .map(boardGame -> new BoardGameDto(
-                            boardGame.getBoardGameId(),
-                            boardGame.getName(),
-                            boardGame.getPricePerDay(),
-                            boardGame.isRented(),
-                            boardGame.getCondition(),
-                            boardGame.getDetails()
-                    ))
-                    .collect(Collectors.toList());
-
-            return ResponseEntity.ok(boardGamesDto);
+        return ResponseEntity.ok(new BoardGameResponse(boardGamesDto));
     }
 
     @PostMapping
     public ResponseEntity addBoardGame(@RequestBody BoardGameDto boardGameDto) {
+        BoardGame boardGame = BoardGameMapper.fromDto(boardGameDto);
         try {
-            BoardGame boardGame = new BoardGame(
-                    boardGameDto.getBoardGameId(),
-                    boardGameDto.getName(),
-                    boardGameDto.getPricePerDay(),
-                    boardGameDto.isRented(),
-                    boardGameDto.getCondition(),
-                    boardGameDto.getDetails()
-            );
-
             boardGameFacade.addBoardGame(boardGame);
-            URI uri = URI.create("boardgames/" + boardGame.getBoardGameId());
-            logger.info("Add board game!");
-
-            return ResponseEntity.created(uri).build();
         } catch (InvalidBoardGameException exceptions) {
-            return ResponseEntity.badRequest().body(exceptions.getBoardGameExceptions());
+            return ResponseEntity.badRequest().body(exceptions.getBoardGameErrors());
         }
+        URI uri = URI.create("boardgames/" + boardGame.getBoardGameId());
+        logger.info("Add new board game " + boardGame.getName() + "!");
+        return ResponseEntity.created(uri).build();
     }
 
     @GetMapping("/{boardGameId}")
     public ResponseEntity<BoardGameDto> getBoardGameById(@PathVariable long boardGameId) {
         BoardGame boardGame = boardGameFacade.getBoardGame(boardGameId);
-
-        if (boardGame != null) {
-            BoardGameDto boardGameDto = new BoardGameDto(
-                    boardGame.getBoardGameId(),
-                    boardGame.getName(),
-                    boardGame.getPricePerDay(),
-                    boardGame.isRented(),
-                    boardGame.getCondition(),
-                    boardGame.getDetails()
-            );
-
-            return ResponseEntity.ok(boardGameDto);
-        } else {
+        if (boardGame == null) {
             return ResponseEntity.notFound().build();
+        } else {
+            BoardGameDto boardGameDto = BoardGameMapper.toDto(boardGame);
+            return ResponseEntity.ok(boardGameDto);
         }
     }
 
     @DeleteMapping("/{boardGameId}")
     public ResponseEntity deleteBoardGame(@PathVariable long boardGameId) {
         boardGameFacade.deleteBoardGame(boardGameId);
-
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{boardGameId}")
     public ResponseEntity updateBoardGame(@PathVariable long boardGameId, @RequestBody BoardGameDto updatedBoardGameDto) {
         BoardGame boardGame = boardGameFacade.getBoardGame(boardGameId);
-
-        if (boardGame != null) {
-            BoardGame updatedBoardGame = new BoardGame(
-                    boardGameId,
-                    updatedBoardGameDto.getName(),
-                    updatedBoardGameDto.getPricePerDay(),
-                    updatedBoardGameDto.isRented(),
-                    updatedBoardGameDto.getCondition(),
-                    updatedBoardGameDto.getDetails());
+        if (boardGame == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            BoardGame updatedBoardGame = BoardGameMapper.fromDto(updatedBoardGameDto);
             try {
                 boardGameFacade.updateBoardGame(boardGameId, updatedBoardGame);
-                URI uri = URI.create("boardgames/" + boardGameId);
-                logger.info("Updated board game " + boardGameId + "!");
-
-                return ResponseEntity.created(uri).body(updatedBoardGame);
             } catch (InvalidBoardGameException exceptions) {
-                return ResponseEntity.badRequest().body(exceptions.getBoardGameExceptions());
+                return ResponseEntity.badRequest().body(exceptions.getBoardGameErrors());
             }
-        } else {
-            return ResponseEntity.notFound().build();
+            URI uri = URI.create("boardgames/" + boardGameId);
+            logger.info("Updated board game " + updatedBoardGame.getName() + "!");
+            return ResponseEntity.created(uri).body(updatedBoardGame);
         }
     }
-
 }

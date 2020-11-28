@@ -51,7 +51,7 @@ public class UserController {
 
             userFacade.addUser(user);
             URI uri = URI.create("/users/" + user.getUserId());
-            logger.info("Add new user!");
+            logger.info("Add new user! " + user.getNick());
 
             return ResponseEntity.created(uri).build();
         } catch (InvalidUserException exception) {

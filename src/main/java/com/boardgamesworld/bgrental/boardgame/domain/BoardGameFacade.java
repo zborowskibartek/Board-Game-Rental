@@ -4,7 +4,7 @@ import java.util.List;
 
 public class BoardGameFacade {
 
-    private BoardGameService boardGameService;
+    private final BoardGameService boardGameService;
 
     public BoardGameFacade(BoardGameService boardGameService) {
         this.boardGameService = boardGameService;
@@ -22,12 +22,12 @@ public class BoardGameFacade {
         boardGameService.addBoardGame(boardGame);
     }
 
-    public void updateBoardGame(long boardGameId, BoardGame updatedBoardGame) {
-        boardGameService.updateBoardGame(boardGameId, updatedBoardGame);
-    }
-
     public void deleteBoardGame(long boardGameId) {
         boardGameService.deleteBoardGame(boardGameId);
+    }
+
+    public void updateBoardGame(long boardGameId, BoardGame updatedBoardGame) {
+        boardGameService.updateBoardGame(boardGameId, updatedBoardGame);
     }
 
 }

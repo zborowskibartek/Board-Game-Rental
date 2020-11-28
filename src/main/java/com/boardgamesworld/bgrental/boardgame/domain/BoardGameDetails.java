@@ -8,16 +8,16 @@ import lombok.Setter;
 import java.util.List;
 
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class BoardGameDetails {
 
-    private String description;
-    private int minPlayers;
-    private int maxPlayers;
-    private String author;
-    private String publisher;
-    private List<BoardGameType> types;
-    private List<BoardGameCategory> categories;
+    private  String description;
+    private  int minPlayers;
+    private  int maxPlayers;
+    private  String author;
+    private  String publisher;
+    private  List<BoardGameType> types;
+    private  List<BoardGameCategory> categories;
 
 }

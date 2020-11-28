@@ -27,7 +27,7 @@ class RentService {
 
     void returnBoardGame(long boardGameId) {
         rentValidator.validateReturn(boardGameId);
-        moveRentToRentHistoryRepository(boardGameId);
+        addRentToRentHistoryRepository(boardGameId);
         removeRentFromRepository(boardGameId);
         changeBoardGameStatusAsReturned(boardGameId);
     }
@@ -43,20 +43,14 @@ class RentService {
     List<BoardGame> getAllRentBoardGames() {
         List<BoardGame> boardGames = new ArrayList<>();
         rentRepository.getAllRentBoardGameIds()
-                .forEach(boardGameId -> {
-                    boardGames.add(boardGameFacade.getBoardGame(boardGameId));
-                });
-
+                .forEach(boardGameId -> boardGames.add(boardGameFacade.getBoardGame(boardGameId)));
         return boardGames;
     }
 
     List<BoardGame> getAllRentBoardGamesByUser(long userId) {
         List<BoardGame> boardGames = new ArrayList<>();
         rentRepository.getAllRentBoardGameIdsByUser(userId)
-                .forEach(boardGameId -> {
-                    boardGames.add(boardGameFacade.getBoardGame(boardGameId));
-                });
-
+                .forEach(boardGameId -> boardGames.add(boardGameFacade.getBoardGame(boardGameId)));
         return boardGames;
     }
 
@@ -89,7 +83,7 @@ class RentService {
                         boardGame.getDetails()));
     }
 
-    private void moveRentToRentHistoryRepository(long boardGameId) {
+    private void addRentToRentHistoryRepository(long boardGameId) {
         Rent rent = rentRepository.getRent(boardGameId);
         rentHistoryFacade.addRentHistory(
                 new RentHistory(rent.getUserId(),

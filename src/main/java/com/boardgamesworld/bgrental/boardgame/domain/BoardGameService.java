@@ -4,8 +4,8 @@ import java.util.List;
 
 class BoardGameService {
 
-    private BoardGameRepository boardGameRepository;
-    private BoardGameValidator boardGameValidator;
+    private final BoardGameRepository boardGameRepository;
+    private final BoardGameValidator boardGameValidator;
 
     BoardGameService(BoardGameRepository boardGameRepository, BoardGameValidator boardGameValidator) {
         this.boardGameRepository = boardGameRepository;

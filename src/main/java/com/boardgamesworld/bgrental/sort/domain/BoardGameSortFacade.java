@@ -1,6 +1,8 @@
 package com.boardgamesworld.bgrental.sort.domain;
 
 import com.boardgamesworld.bgrental.boardgame.domain.BoardGame;
+import com.boardgamesworld.bgrental.boardgame.domain.BoardGameCategory;
+import com.boardgamesworld.bgrental.boardgame.domain.BoardGameType;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -10,12 +12,8 @@ public class BoardGameSortFacade {
 
     private BoardGameSortService boardGameSortService;
 
-    public List<BoardGame> getSortedBoardGamesByName(String order) {
-        return boardGameSortService.getSortedBoardGamesByName(order);
-    }
-
-    public List<BoardGame> getSortedBoardGamesByPrice(String order) {
-        return boardGameSortService.getSortedBoardGamesByPrice(order);
+    public List<BoardGame> getSortedBoardGames(BoardGameSortType sort, List<BoardGameType> types, BoardGameCategory category) {
+        return boardGameSortService.getSortedBoardGames(sort, types, category);
     }
 
 }
