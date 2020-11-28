@@ -19,6 +19,6 @@ public class BoardGameDto {
     private double pricePerDay;
     private boolean rented;
     private BoardGameCondition condition;
-    private BoardGameDetails details;
+    private BoardGameDetailsDto details;
 
 }

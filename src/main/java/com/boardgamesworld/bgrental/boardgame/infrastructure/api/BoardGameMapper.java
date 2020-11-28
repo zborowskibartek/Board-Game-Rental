@@ -1,6 +1,7 @@
 package com.boardgamesworld.bgrental.boardgame.infrastructure.api;
 
 import com.boardgamesworld.bgrental.boardgame.domain.BoardGame;
+import com.boardgamesworld.bgrental.boardgame.domain.BoardGameDetails;
 
 public class BoardGameMapper {
 
@@ -12,7 +13,7 @@ public class BoardGameMapper {
                 boardGame.getPricePerDay(),
                 boardGame.isRented(),
                 boardGame.getCondition(),
-                boardGame.getDetails()
+                getBoardGameDetailsDto(boardGame.getDetails())
         );
     }
 
@@ -23,7 +24,29 @@ public class BoardGameMapper {
                 boardGameDto.getPricePerDay(),
                 boardGameDto.isRented(),
                 boardGameDto.getCondition(),
-                boardGameDto.getDetails()
+                getBoardGameDetails(boardGameDto.getDetails()));
+    }
+
+    private static BoardGameDetailsDto getBoardGameDetailsDto(BoardGameDetails boardGameDetails) {
+        return new BoardGameDetailsDto(
+                boardGameDetails.getDescription(),
+                boardGameDetails.getMinPlayers(),
+                boardGameDetails.getMaxPlayers(),
+                boardGameDetails.getAuthor(),
+                boardGameDetails.getPublisher(),
+                boardGameDetails.getTypes(),
+                boardGameDetails.getCategories()
+        );
+    }
+
+    private static BoardGameDetails getBoardGameDetails(BoardGameDetailsDto boardGameDetailsDto) {
+        return new BoardGameDetails(boardGameDetailsDto.getDescription(),
+                boardGameDetailsDto.getMinPlayers(),
+                boardGameDetailsDto.getMaxPlayers(),
+                boardGameDetailsDto.getAuthor(),
+                boardGameDetailsDto.getPublisher(),
+                boardGameDetailsDto.getTypes(),
+                boardGameDetailsDto.getCategories()
         );
     }
 }
