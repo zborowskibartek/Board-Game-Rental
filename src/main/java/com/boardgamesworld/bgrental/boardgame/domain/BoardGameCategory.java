@@ -1,6 +1,6 @@
 package com.boardgamesworld.bgrental.boardgame.domain;
 
-enum BoardGameCategory {
+public enum BoardGameCategory {
     FAMILY,
     PARTY,
     ECONOMIC,

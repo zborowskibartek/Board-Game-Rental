@@ -9,68 +9,47 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-    private UserFacade userFacade;
-    private Logger logger = LoggerFactory.getLogger(UserController.class);
+    private final UserFacade userFacade;
+    private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     public UserController(UserFacade userFacade) {
         this.userFacade = userFacade;
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDto>> getAllUser() {
+    public ResponseEntity<UserResponse> getAllUser() {
         List<User> users = userFacade.getAllUser();
-        List<UserDto> usersDto = new ArrayList<>();
-
-        users.forEach(user -> usersDto.add(
-                new UserDto(user.getUserId(),
-                        user.getFirstName(),
-                        user.getSecondName(),
-                        user.getEmail(),
-                        user.getNick(),
-                        user.getPassword())));
-
-        return ResponseEntity.ok(usersDto);
+        List<UserDto> usersDto = users.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(new UserResponse(usersDto));
     }
 
     @PostMapping
     public ResponseEntity addUser(@RequestBody UserDto userDto) {
+        User user = fromDto(userDto);
         try {
-            User user = new User(userDto.getUserId(),
-                    userDto.getFirstName(),
-                    userDto.getSecondName(),
-                    userDto.getEmail(),
-                    userDto.getNick(),
-                    userDto.getPassword());
-
             userFacade.addUser(user);
-            URI uri = URI.create("/users/" + user.getUserId());
-            logger.info("Add new user!");
-
-            return ResponseEntity.created(uri).build();
         } catch (InvalidUserException exception) {
             return ResponseEntity.badRequest().body(exception.getUserExceptions());
         }
+        URI uri = URI.create("/users/" + user.getUserId());
+        logger.info("Add new user! " + user.getUserId());
+        return ResponseEntity.created(uri).build();
     }
 
     @GetMapping("/{userId}")
     public ResponseEntity<UserDto> getUser(@PathVariable long userId) {
         User user = userFacade.getUser(userId);
-
         if (user != null) {
-            UserDto userDto = new UserDto(user.getUserId(),
-                    user.getFirstName(),
-                    user.getSecondName(),
-                    user.getEmail(),
-                    user.getNick(),
-                    user.getPassword());
-
+            UserDto userDto = toDto(user);
             return ResponseEntity.ok(userDto);
         } else {
             return ResponseEntity.notFound().build();
@@ -80,34 +59,40 @@ public class UserController {
     @DeleteMapping("/{userId}")
     public ResponseEntity deleteUser(@PathVariable long userId) {
         userFacade.deleteUser(userId);
-
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{userId}")
     public ResponseEntity updateUser(@PathVariable long userId, @RequestBody UserDto updatedUserDto) {
         User user = userFacade.getUser(userId);
-        if (user != null) {
-            try {
-                User updatedUser = new User(
-                        userId,
-                        updatedUserDto.getFirstName(),
-                        updatedUserDto.getSecondName(),
-                        updatedUserDto.getEmail(),
-                        updatedUserDto.getNick(),
-                        updatedUserDto.getPassword());
-
-                userFacade.updateUser(userId, updatedUser);
-                URI uri = URI.create("/users/" + userId);
-                logger.info("Updated user " + userId + "!");
-
-
-                return ResponseEntity.created(uri).build();
-            } catch (InvalidUserException exception) {
-                return ResponseEntity.badRequest().body(exception.getUserExceptions());
-            }
-        } else {
+        if (user == null) {
             return ResponseEntity.notFound().build();
         }
+        User updatedUser = fromDto(updatedUserDto);
+        try {
+            userFacade.updateUser(userId, updatedUser);
+        } catch (InvalidUserException exception) {
+            return ResponseEntity.badRequest().body(exception.getUserExceptions());
+        }
+        logger.info("Updated user " + userId + "!");
+        return ResponseEntity.ok().build();
+    }
+
+    private UserDto toDto(User user) {
+        return new UserDto(user.getUserId(),
+                user.getFirstName(),
+                user.getSecondName(),
+                user.getEmail(),
+                user.getNick(),
+                user.getPassword());
+    }
+
+    private User fromDto(UserDto userDto) {
+        return new User(userDto.getUserId(),
+                userDto.getFirstName(),
+                userDto.getSecondName(),
+                userDto.getEmail(),
+                userDto.getNick(),
+                userDto.getPassword());
     }
 }

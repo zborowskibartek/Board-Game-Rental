@@ -4,13 +4,13 @@ import java.util.List;
 
 public class InvalidBoardGameException extends RuntimeException {
 
-    private List<String> boardGameExceptions;
+    private final List<String> boardGameErrors;
 
-    public InvalidBoardGameException(List<String> boardGameExceptions) {
-        this.boardGameExceptions = boardGameExceptions;
+    public InvalidBoardGameException(List<String> boardGameErrors) {
+        this.boardGameErrors = boardGameErrors;
     }
 
-    public List<String> getBoardGameExceptions() {
-        return boardGameExceptions;
+    public List<String> getBoardGameErrors() {
+        return boardGameErrors;
     }
 }

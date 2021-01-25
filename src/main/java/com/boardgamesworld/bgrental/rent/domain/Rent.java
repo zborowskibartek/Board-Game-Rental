@@ -13,5 +13,4 @@ public class Rent {
     private final long userId;
     private final LocalDateTime rentedDate;
 
-
 }

@@ -1,28 +1,17 @@
 package com.boardgamesworld.bgrental.user.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class User {
 
-    private long userId;
-    private String firstName;
-    private String secondName;
-    private String email;
-    private String nick;
-    private String password;
+    private final long userId;
+    private final String firstName;
+    private final String secondName;
+    private final String email;
+    private final String nick;
+    private final String password;
 
-    public User(long userId,
-                String firstName,
-                String secondName,
-                String email,
-                String nick,
-                String password) {
-        this.userId = userId;
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.email = email;
-        this.nick = nick;
-        this.password = password;
-    }
 }

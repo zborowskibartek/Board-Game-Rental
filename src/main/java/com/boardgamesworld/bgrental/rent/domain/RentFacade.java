@@ -8,7 +8,7 @@ import java.util.List;
 @AllArgsConstructor
 public class RentFacade {
 
-    private RentService rentService;
+    private final RentService rentService;
 
     public void rentBoardGame(long boardGameId, long userId) {
         rentService.rentBoardGame(boardGameId, userId);

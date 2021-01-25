@@ -1,5 +1,6 @@
 package com.boardgamesworld.bgrental.rent.infrastructure.database.inmemory;
 
+import com.boardgamesworld.bgrental.rent.domain.InvalidRentException;
 import com.boardgamesworld.bgrental.rent.domain.Rent;
 import com.boardgamesworld.bgrental.rent.domain.RentRepository;
 import org.springframework.stereotype.Repository;
