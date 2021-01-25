@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 class UserValidator {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     UserValidator(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -38,8 +38,11 @@ class UserValidator {
         }
     }
 
-    void validateUpdatedUser(User updatedUser) {
+    void validateUpdatedUser(long userId, User updatedUser) {
         List<String> errors = new ArrayList<>();
+        if (userId != updatedUser.getUserId()){
+            errors.add("Invalid user id in request body!");
+        }
         if (!isFirstNameValid(updatedUser.getFirstName())) {
             errors.add("Invalid user first name!");
         }

@@ -5,10 +5,10 @@ import com.boardgamesworld.bgrental.boardgame.domain.BoardGame;
 import com.boardgamesworld.bgrental.boardgame.domain.BoardGameFacade;
 import com.boardgamesworld.bgrental.boardgame.infrastructure.api.BoardGameDto;
 import com.boardgamesworld.bgrental.boardgame.infrastructure.api.BoardGameMapper;
+import com.boardgamesworld.bgrental.boardgame.infrastructure.api.BoardGameResponse;
 import com.boardgamesworld.bgrental.rent.domain.InvalidRentException;
 import com.boardgamesworld.bgrental.rent.domain.Rent;
 import com.boardgamesworld.bgrental.rent.domain.RentFacade;
-import com.boardgamesworld.bgrental.user.domain.User;
 import com.boardgamesworld.bgrental.user.domain.UserFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,8 +42,7 @@ public class RentController {
             return ResponseEntity.badRequest().body(exception.getRentExceptions());
         }
         URI uri = URI.create("/rent/" + boardGameId);
-        logger.info("User " + userFacade.getUser(userId).getNick() +
-                " Rent board game! " + boardGameFacade.getBoardGame(boardGameId).getName());
+        logger.info("User with id: " + userId + " rent board game with id: " + boardGameId + " !");
         return ResponseEntity.created(uri).build();
     }
 
@@ -54,55 +53,47 @@ public class RentController {
         } catch (InvalidRentException exception) {
             return ResponseEntity.badRequest().body(exception.getRentExceptions());
         }
-        logger.info("Returned board game!" + boardGameFacade.getBoardGame(boardGameId).getName());
+        logger.info("Returned board game with id " + boardGameId + " !");
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/rents")
-    public ResponseEntity<List<RentDto>> getAllRents() {
+    public ResponseEntity<RentResponse> getAllRents() {
         List<Rent> rents = rentFacade.getAllRents();
-        List<RentDto> rentsDto;
-        rentsDto = rents.stream()
+        List<RentDto> rentsDto = rents.stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
-
-        return ResponseEntity.ok(rentsDto);
+        return ResponseEntity.ok(new RentResponse(rentsDto));
     }
 
     @GetMapping(value = "/rents", params = "userId")
-    public ResponseEntity<List<RentDto>> getAllRentsByUser(@RequestParam long userId) {
+    public ResponseEntity<RentResponse> getAllRentsByUser(@RequestParam long userId) {
         List<Rent> rents = rentFacade.getAllRentsByUser(userId);
-        List<RentDto> rentsDto;
-        rentsDto = rents.stream()
+        List<RentDto> rentsDto = rents.stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
-
-        return ResponseEntity.ok(rentsDto);
+        return ResponseEntity.ok(new RentResponse(rentsDto));
     }
 
     @GetMapping("/rents/boardgames")
-    public ResponseEntity<List<BoardGameDto>> getAllRentBoardGames() {
+    public ResponseEntity<BoardGameResponse> getAllRentBoardGames() {
         List<BoardGame> boardGames = rentFacade.getAllRentBoardGames();
-        List<BoardGameDto> boardGamesDto;
-        boardGamesDto = boardGames.stream()
+        List<BoardGameDto> boardGamesDto = boardGames.stream()
                 .map(BoardGameMapper::toDto)
                 .collect(Collectors.toList());
-
-        return ResponseEntity.ok(boardGamesDto);
+        return ResponseEntity.ok(new BoardGameResponse(boardGamesDto));
     }
 
     @GetMapping(value = "/rents/boardgames", params = "userId")
-    public ResponseEntity<List<BoardGameDto>> getAllRentBoardGamesByUser(@RequestParam long userId) {
+    public ResponseEntity<BoardGameResponse> getAllRentBoardGamesByUser(@RequestParam long userId) {
         List<BoardGame> boardGames = rentFacade.getAllRentBoardGamesByUser(userId);
-        List<BoardGameDto> boardGamesDto;
-        boardGamesDto = boardGames.stream()
+        List<BoardGameDto> boardGamesDto = boardGames.stream()
                 .map(BoardGameMapper::toDto)
                 .collect(Collectors.toList());
-
-        return ResponseEntity.ok(boardGamesDto);
+        return ResponseEntity.ok(new BoardGameResponse(boardGamesDto));
     }
 
-    private RentDto toDto(Rent rent){
+    private RentDto toDto(Rent rent) {
         return new RentDto(rent.getGameId(), rent.getUserId());
     }
 }

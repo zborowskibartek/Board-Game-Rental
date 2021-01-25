@@ -10,7 +10,8 @@ class BoardGameFacadeConfiguration {
     BoardGameFacade boardGameFacade(BoardGameRepository boardGameRepository) {
         BoardGameValidator boardGameValidator = new BoardGameValidator();
         BoardGameService boardGameService = new BoardGameService(boardGameRepository, boardGameValidator);
-        return new BoardGameFacade(boardGameService);
+        BoardGameSortService boardGameSortService = new BoardGameSortService(boardGameRepository);
+        return new BoardGameFacade(boardGameService, boardGameSortService);
     }
 
 }

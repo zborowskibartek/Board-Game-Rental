@@ -6,7 +6,7 @@ import java.util.List;
 
 public class UserFacade {
 
-    private UserService userService;
+    private final UserService userService;
 
     public UserFacade(UserService userService) {
         this.userService = userService;

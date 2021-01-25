@@ -12,40 +12,33 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("")
+@RequestMapping
 public class RentHistoryController {
 
     private final RentHistoryFacade rentHistoryFacade;
 
     @GetMapping("/history")
-    public ResponseEntity<List<RentHistoryDto>> getAllRentHistory() {
+    public ResponseEntity<RentHistoryResponse> getAllRentHistory() {
         List<RentHistory> rentHistory = rentHistoryFacade.getAllRentHistory();
-        List<RentHistoryDto> rentHistoryDto;
-
-        rentHistoryDto = rentHistory.stream()
-                .map(rent -> new RentHistoryDto(
-                        rent.getUserId(),
-                        rent.getGameId(),
-                        rent.getRentedDate(),
-                        rent.getReturnedDate()))
+        List<RentHistoryDto> rentHistoryDto = rentHistory.stream()
+                .map(this::toDto)
                 .collect(Collectors.toList());
-
-        return ResponseEntity.ok(rentHistoryDto);
+        return ResponseEntity.ok(new RentHistoryResponse(rentHistoryDto));
     }
 
     @GetMapping(value = "/history", params = "userId")
-    public ResponseEntity<List<RentHistoryDto>> getAllRentHistoryByUser(@RequestParam long userId) {
+    public ResponseEntity<RentHistoryResponse> getAllRentHistoryByUser(@RequestParam long userId) {
         List<RentHistory> rentHistory = rentHistoryFacade.getAllRentHistoryByUser(userId);
-        List<RentHistoryDto> rentHistoryDto;
-
-        rentHistoryDto = rentHistory.stream()
-                .map(rent -> new RentHistoryDto(
-                        rent.getUserId(),
-                        rent.getGameId(),
-                        rent.getRentedDate(),
-                        rent.getReturnedDate()))
+        List<RentHistoryDto> rentHistoryDto = rentHistory.stream()
+                .map(this::toDto)
                 .collect(Collectors.toList());
+        return ResponseEntity.ok(new RentHistoryResponse(rentHistoryDto));
+    }
 
-        return ResponseEntity.ok(rentHistoryDto);
+    private RentHistoryDto toDto(RentHistory user) {
+        return new RentHistoryDto(user.getUserId(),
+                user.getGameId(),
+                user.getRentedDate(),
+                user.getReturnedDate());
     }
 }

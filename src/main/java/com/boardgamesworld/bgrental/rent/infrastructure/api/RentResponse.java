@@ -5,13 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RentDto {
+public class RentResponse {
 
-    private long gameId;
-    private long userId;
+    public List<RentDto> rentList;
 
 }

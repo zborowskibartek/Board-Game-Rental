@@ -11,7 +11,6 @@ class UserFacadeConfiguration {
     UserFacade userFacade(UserRepository userRepository) {
         UserValidator userValidator = new UserValidator(userRepository);
         UserService userService = new UserService(userRepository, userValidator);
-
         return new UserFacade(userService);
     }
 

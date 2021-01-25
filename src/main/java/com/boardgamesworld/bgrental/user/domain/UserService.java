@@ -5,8 +5,8 @@ import java.util.List;
 
 class UserService {
 
-    private UserRepository userRepository;
-    private UserValidator userValidator;
+    private final UserRepository userRepository;
+    private final UserValidator userValidator;
 
     UserService(UserRepository userRepository, UserValidator userValidator) {
         this.userRepository = userRepository;
@@ -27,7 +27,7 @@ class UserService {
     }
 
     void updateUser(long userId, User updatedUser) {
-        userValidator.validateUpdatedUser(updatedUser);
+        userValidator.validateUpdatedUser(userId, updatedUser);
         userRepository.updateUser(userId, updatedUser);
     }
 
