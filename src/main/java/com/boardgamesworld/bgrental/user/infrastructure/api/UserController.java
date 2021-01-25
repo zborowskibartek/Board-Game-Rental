@@ -74,9 +74,8 @@ public class UserController {
         } catch (InvalidUserException exception) {
             return ResponseEntity.badRequest().body(exception.getUserExceptions());
         }
-        URI uri = URI.create("/users/" + userId);
         logger.info("Updated user " + userId + "!");
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.ok().build();
     }
 
     private UserDto toDto(User user) {
