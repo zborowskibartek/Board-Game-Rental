@@ -5,6 +5,6 @@ import java.util.Set;
 
 public interface BoardGameSort {
 
-    List<BoardGame> getSortedBoardGames(BoardGameSortType sort, Set<BoardGameType> types, Set<BoardGameCategory> categories, int offset, int limit);
+    List<BoardGame> getBoardGames(BoardGameSortType sort, Set<BoardGameType> types, Set<BoardGameCategory> categories, int offset, int limit);
 
 }
