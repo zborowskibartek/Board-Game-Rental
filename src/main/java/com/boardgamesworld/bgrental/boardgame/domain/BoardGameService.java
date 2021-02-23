@@ -10,7 +10,6 @@ class BoardGameService {
         this.boardGameValidator = boardGameValidator;
     }
 
-
     BoardGame getBoardGame(long boardGameId) {
         return boardGameRepository.getBoardGame(boardGameId);
     }
@@ -28,5 +27,4 @@ class BoardGameService {
     void deleteBoardGame(long boardGameId) {
         boardGameRepository.deleteBoardGame(boardGameId);
     }
-
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 class BoardGameValidator {
 
-    boolean validateBoardGame(BoardGame boardGame) {
+    void validateBoardGame(BoardGame boardGame) {
         List<String> errors = new ArrayList<>();
         if (!isNameValid(boardGame.getName())) {
             errors.add("Invalid board game name!");
@@ -19,7 +19,6 @@ class BoardGameValidator {
         if (errors.size() > 0) {
             throw new InvalidBoardGameException(errors);
         }
-        return true;
     }
 
     private boolean isNameValid(String name) {
