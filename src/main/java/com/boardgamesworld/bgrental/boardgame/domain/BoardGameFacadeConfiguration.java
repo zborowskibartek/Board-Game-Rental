@@ -13,5 +13,4 @@ class BoardGameFacadeConfiguration {
         BoardGameSortService boardGameSortService = new BoardGameSortService(boardGameRepository);
         return new BoardGameFacade(boardGameService, boardGameSortService);
     }
-
 }
