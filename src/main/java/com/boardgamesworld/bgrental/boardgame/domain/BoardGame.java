@@ -2,7 +2,6 @@ package com.boardgamesworld.bgrental.boardgame.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
 @AllArgsConstructor

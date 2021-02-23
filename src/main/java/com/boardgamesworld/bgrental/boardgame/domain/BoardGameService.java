@@ -1,7 +1,5 @@
 package com.boardgamesworld.bgrental.boardgame.domain;
 
-import java.util.List;
-
 class BoardGameService {
 
     private final BoardGameRepository boardGameRepository;
@@ -12,9 +10,6 @@ class BoardGameService {
         this.boardGameValidator = boardGameValidator;
     }
 
-    List<BoardGame> getAllBoardGames() {
-        return boardGameRepository.getAllBoardGames();
-    }
 
     BoardGame getBoardGame(long boardGameId) {
         return boardGameRepository.getBoardGame(boardGameId);

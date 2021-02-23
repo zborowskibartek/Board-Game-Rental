@@ -15,13 +15,9 @@ public class BoardGameFacade {
         this.boardGameSortService = boardGameSortService;
     }
 
-    public List<BoardGame> getAllBoardGames() {
-        return boardGameService.getAllBoardGames();
-    }
-
-    public List<BoardGame> getSortedBoardGames(@Nullable BoardGameSortType sort, @Nullable Set<BoardGameType> types, @Nullable Set<BoardGameCategory> categories,
+    public List<BoardGame> getBoardGames(@Nullable BoardGameSortType sort, @Nullable Set<BoardGameType> types, @Nullable Set<BoardGameCategory> categories,
                                                int offset, int limit) {
-        return boardGameSortService.getSortedBoardGames(sort, types, categories, offset, limit);
+        return boardGameSortService.getBoardGames(sort, types, categories, offset, limit);
     }
 
     public BoardGame getBoardGame(long boardGameId) {
