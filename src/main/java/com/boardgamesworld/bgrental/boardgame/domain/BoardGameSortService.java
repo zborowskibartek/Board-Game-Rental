@@ -15,7 +15,7 @@ public class BoardGameSortService implements BoardGameSort {
 
     @Override
     public List<BoardGame> getAllSortedBoardGames(@Nullable BoardGameSortType sort, @Nullable Set<BoardGameType> types, @Nullable Set<BoardGameCategory> categories,
-                                               @Nullable int offset, @Nullable int limit) {
+                                                  int offset, int limit) {
         BoardGameSortType sortType = sort == null ? BoardGameSortType.NAME_ASC : sort;
         List<BoardGame> boardGames = boardGameRepository.getAllBoardGames();
         return boardGames.stream()
