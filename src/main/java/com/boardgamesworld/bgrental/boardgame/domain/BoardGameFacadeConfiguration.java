@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-class BoardGameFacadeConfiguration {
+public class BoardGameFacadeConfiguration {
 
     @Bean
     BoardGameFacade boardGameFacade(BoardGameRepository boardGameRepository) {

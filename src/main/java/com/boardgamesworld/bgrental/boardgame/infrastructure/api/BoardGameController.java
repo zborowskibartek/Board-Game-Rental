@@ -28,7 +28,7 @@ public class BoardGameController {
                                                                  @RequestParam(value = "category", required = false) Set<BoardGameCategory> categories,
                                                                  @RequestParam(value = "offset", defaultValue = "0", required = false) int offset,
                                                                  @RequestParam(value = "limit", defaultValue = "20", required = false) int limit) {
-        List<BoardGame> boardGames = boardGameFacade.getAllSortedBoardGames(parseSortType(sort), types, categories, offset, limit);
+        List<BoardGame> boardGames = boardGameFacade.getAllBoardGames(parseSortType(sort), types, categories, offset, limit);
         List<BoardGameDto> boardGameDto = boardGames.stream()
                 .map(BoardGameMapper::toDto)
                 .collect(Collectors.toList());

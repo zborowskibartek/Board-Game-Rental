@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.*;
 
 @Repository
-class UserRepositoryInMemory implements UserRepository {
+public class UserRepositoryInMemory implements UserRepository {
 
     private final Map<Long, User> users = new HashMap<>();
 

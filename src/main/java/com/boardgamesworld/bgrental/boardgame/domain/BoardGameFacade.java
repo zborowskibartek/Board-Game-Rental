@@ -10,14 +10,24 @@ public class BoardGameFacade {
     private final BoardGameService boardGameService;
     private final BoardGameSortService boardGameSortService;
 
-    public BoardGameFacade(BoardGameService boardGameService, BoardGameSortService boardGameSortService) {
+    BoardGameFacade(BoardGameService boardGameService, BoardGameSortService boardGameSortService) {
         this.boardGameService = boardGameService;
         this.boardGameSortService = boardGameSortService;
     }
 
-    public List<BoardGame> getAllSortedBoardGames(@Nullable BoardGameSortType sort, @Nullable Set<BoardGameType> types, @Nullable Set<BoardGameCategory> categories,
-                                               int offset, int limit) {
-        return boardGameSortService.getAllSortedBoardGames(sort, types, categories, offset, limit);
+    public List<BoardGame> getAllBoardGames(@Nullable BoardGameSortType sort, @Nullable Set<BoardGameType> types, @Nullable Set<BoardGameCategory> categories,
+                                            int offset, int limit) {
+        return boardGameSortService.getAllBoardGames(sort, types, categories, offset, limit);
+    }
+
+    public List<BoardGame> getAllBoardGames(@Nullable Set<BoardGameType> types, @Nullable Set<BoardGameCategory> categories,
+                                            int offset, int limit) {
+        return getAllBoardGames(null, types, categories, offset, limit);
+
+    }
+
+    public List<BoardGame> getAllBoardGames(@Nullable BoardGameSortType sort, int offset, int limit) {
+        return getAllBoardGames(sort, null, null, offset, limit);
     }
 
     public BoardGame getBoardGame(long boardGameId) {
