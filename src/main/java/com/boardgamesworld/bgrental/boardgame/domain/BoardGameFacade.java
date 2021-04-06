@@ -20,13 +20,13 @@ public class BoardGameFacade {
         return boardGameSortService.getAllBoardGames(sort, types, categories, offset, limit);
     }
 
-    public List<BoardGame> getAllBoardGames(@Nullable Set<BoardGameType> types, @Nullable Set<BoardGameCategory> categories,
+    public List<BoardGame> getAllBoardGamesFilteredByTypeAndCategory(@Nullable Set<BoardGameType> types, @Nullable Set<BoardGameCategory> categories,
                                             int offset, int limit) {
         return getAllBoardGames(null, types, categories, offset, limit);
 
     }
 
-    public List<BoardGame> getAllBoardGames(@Nullable BoardGameSortType sort, int offset, int limit) {
+    public List<BoardGame> getAllSortedBoardGames(@Nullable BoardGameSortType sort, int offset, int limit) {
         return getAllBoardGames(sort, null, null, offset, limit);
     }
 

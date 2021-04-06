@@ -6,6 +6,8 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Tag("BoardGameFacadeTests")
+@Tag("BoardGameFacadeTestsWithInMemoryRepo")
 class BoardGameFacadeGetTest {
 
     private BoardGameFacade boardGameFacade;
@@ -31,7 +33,7 @@ class BoardGameFacadeGetTest {
 
     @Test
     @DisplayName("should return null when board game is not present")
-    void shouldReturnNullWhenBordGameIsNotPresent() {
+    void shouldReturnNullWhenBoardGameIsNotPresent() {
         //when
         BoardGame resultBoardGame = boardGameFacade.getBoardGame(1);
         //then
@@ -45,11 +47,10 @@ class BoardGameFacadeGetTest {
         @DisplayName("sorted by default")
         void shouldReturnAllBoardGamesSortedByDefault() {
             //given
-
             boardGameFacade.addBoardGame(boardGameBuilder.setBoardGameId(1).setName("A").build());
             boardGameFacade.addBoardGame(boardGameBuilder.setBoardGameId(2).setName("B").build());
             //when
-            List<BoardGame> boardGames = boardGameFacade.getAllBoardGames(null, 0, 2);
+            List<BoardGame> boardGames = boardGameFacade.getAllSortedBoardGames(null, 0, 2);
             //then
             assertAll(
                     () -> assertTrue(boardGames.get(0).getName().startsWith("A")),
@@ -66,7 +67,7 @@ class BoardGameFacadeGetTest {
             boardGameFacade.addBoardGame(boardGameBuilder.setBoardGameId(2).setName("B").build());
 
             //when
-            List<BoardGame> boardGames = boardGameFacade.getAllBoardGames(BoardGameSortType.NAME_ASC, 0, 2);
+            List<BoardGame> boardGames = boardGameFacade.getAllSortedBoardGames(BoardGameSortType.NAME_ASC, 0, 2);
             //then
             assertAll(
                     () -> assertTrue(boardGames.get(0).getName().startsWith("A")),
@@ -82,7 +83,7 @@ class BoardGameFacadeGetTest {
             boardGameFacade.addBoardGame(boardGameBuilder.setBoardGameId(1).setPricePerDay(5.0).build());
             boardGameFacade.addBoardGame(boardGameBuilder.setBoardGameId(2).setPricePerDay(10.0).build());
             //when
-            List<BoardGame> boardGames = boardGameFacade.getAllBoardGames(BoardGameSortType.PRICE_DSC, 0, 2);
+            List<BoardGame> boardGames = boardGameFacade.getAllSortedBoardGames(BoardGameSortType.PRICE_DSC, 0, 2);
             //then
             assertAll(
                     () -> assertEquals(10.0, boardGames.get(0).getPricePerDay()),
@@ -100,7 +101,7 @@ class BoardGameFacadeGetTest {
             boardGameFacade.addBoardGame(boardGameBuilder.setBoardGameId(2).setBoardGameDetailsTypes(
                     new HashSet<>(Collections.singletonList(BoardGameType.DICE_GAME))).build());
             //when
-            List<BoardGame> boardGames = boardGameFacade.getAllBoardGames(type, null, 0, 2);
+            List<BoardGame> boardGames = boardGameFacade.getAllBoardGamesFilteredByTypeAndCategory(type, null, 0, 2);
             //then
             assertAll(
                     () -> assertEquals(type, boardGames.get(0).getDetails().getTypes()),
@@ -112,15 +113,15 @@ class BoardGameFacadeGetTest {
         @DisplayName("filtered by category")
         void shouldReturnAllBoardGamesFilteredByCategory() {
             //given
-            Set<BoardGameCategory> category = new HashSet<>(Collections.singletonList(BoardGameCategory.FAMILY));
-            boardGameFacade.addBoardGame(boardGameBuilder.setBoardGameId(1).setBoardGameDetailsCategory(category).build());
-            boardGameFacade.addBoardGame(boardGameBuilder.setBoardGameId(2).setBoardGameDetailsCategory(
-                    new HashSet<>(Collections.singletonList(BoardGameCategory.LOGIC))).build());
+            Set<BoardGameCategory> family = Collections.singleton(BoardGameCategory.FAMILY);
+            boardGameFacade.addBoardGame(boardGameBuilder.setBoardGameId(1).setBoardGameDetailsCategory(family).build());
+            Set<BoardGameCategory> logic = Collections.singleton(BoardGameCategory.LOGIC);
+            boardGameFacade.addBoardGame(boardGameBuilder.setBoardGameId(2).setBoardGameDetailsCategory(logic).build());
             //when
-            List<BoardGame> boardGames = boardGameFacade.getAllBoardGames(null, category, 0, 2);
+            List<BoardGame> boardGames = boardGameFacade.getAllBoardGamesFilteredByTypeAndCategory(null, family, 0, 2);
             //then
             assertAll(
-                    () -> assertEquals(category, boardGames.get(0).getDetails().getCategories()),
+                    () -> assertEquals(family, boardGames.get(0).getDetails().getCategories()),
                     () -> assertEquals(1, boardGames.size())
             );
         }
@@ -132,7 +133,7 @@ class BoardGameFacadeGetTest {
             boardGameFacade.addBoardGame(boardGameBuilder.setBoardGameId(1).build());
             boardGameFacade.addBoardGame(boardGameBuilder.setBoardGameId(2).build());
             //when
-            List<BoardGame> boardGames = boardGameFacade.getAllBoardGames(null, 1, 2);
+            List<BoardGame> boardGames = boardGameFacade.getAllBoardGames(null, null, null, 1, 2);
             //then
             assertAll(
                     () -> assertEquals(1, boardGames.size())
@@ -146,7 +147,7 @@ class BoardGameFacadeGetTest {
             boardGameFacade.addBoardGame(boardGameBuilder.setBoardGameId(1).build());
             boardGameFacade.addBoardGame(boardGameBuilder.setBoardGameId(2).build());
             //when
-            List<BoardGame> boardGames = boardGameFacade.getAllBoardGames(null, 0, 1);
+            List<BoardGame> boardGames = boardGameFacade.getAllBoardGames(null, null, null, 0, 1);
             //then
             assertAll(
                     () -> assertEquals(1, boardGames.size())

@@ -2,6 +2,7 @@ package com.boardgamesworld.bgrental.boardgame.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -10,6 +11,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Tag("BoardGameFacadeTests")
+@Tag("BoardGameFacadeTestsWithInMemoryRepo")
 class BoardGameFacadeUpdateAndDeleteTest {
     private BoardGameFacade boardGameFacade;
     private BoardGameBuilder boardGameBuilder;
@@ -70,7 +73,7 @@ class BoardGameFacadeUpdateAndDeleteTest {
         boardGameFacade.addBoardGame(boardGameBuilder.setBoardGameId(1).build());
         //when
         boardGameFacade.deleteBoardGame(1);
-        List<BoardGame> boardGames = boardGameFacade.getAllBoardGames(null, 0, 2);
+        List<BoardGame> boardGames = boardGameFacade.getAllBoardGames(null, null, null, 0, 2);
         //then
         assertEquals(0, boardGames.size());
     }

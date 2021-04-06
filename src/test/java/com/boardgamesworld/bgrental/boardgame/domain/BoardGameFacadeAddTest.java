@@ -1,13 +1,12 @@
 package com.boardgamesworld.bgrental.boardgame.domain;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
+
+@Tag("BoardGameFacadeTests")
+@Tag("BoardGameFacadeTestsWithInMemoryRepo")
 class BoardGameFacadeAddTest {
 
     private BoardGameFacade boardGameFacade;
@@ -16,7 +15,7 @@ class BoardGameFacadeAddTest {
     @BeforeEach
     void init() {
         boardGameFacade = new BoardGameFacadeConfiguration().boardGameFacade(new BoardGameRepositoryInMemory());
-        boardGame = BoardGameBuilder.any();
+        boardGame = BoardGameBuilder.anyBoardGame();
     }
 
 
@@ -42,8 +41,10 @@ class BoardGameFacadeAddTest {
             //given
             boardGame = BoardGameBuilder.create().setName("").build();
             //then
-            assertThrows(InvalidBoardGameException.class, () -> boardGameFacade.addBoardGame(boardGame));
+            InvalidBoardGameException invalidBoardGameException = assertThrows(InvalidBoardGameException.class, () -> boardGameFacade.addBoardGame(boardGame));
+            assertTrue(invalidBoardGameException.getBoardGameErrors().contains("Invalid board game name!"));
         }
+
 
         @Test
         @DisplayName("price per day is equal zero")
@@ -51,7 +52,8 @@ class BoardGameFacadeAddTest {
             //given
             boardGame = BoardGameBuilder.create().setPricePerDay(0.0).build();
             //then
-            assertThrows(InvalidBoardGameException.class, () -> boardGameFacade.addBoardGame(boardGame));
+            InvalidBoardGameException invalidBoardGameException = assertThrows(InvalidBoardGameException.class, () -> boardGameFacade.addBoardGame(boardGame));
+            assertTrue(invalidBoardGameException.getBoardGameErrors().contains("Price per day must be greater than 0!"));
         }
 
         @Test
@@ -60,7 +62,8 @@ class BoardGameFacadeAddTest {
             //given
             boardGame = BoardGameBuilder.create().setPricePerDay(-1.0).build();
             //then
-            assertThrows(InvalidBoardGameException.class, () -> boardGameFacade.addBoardGame(boardGame));
+            InvalidBoardGameException invalidBoardGameException = assertThrows(InvalidBoardGameException.class, () -> boardGameFacade.addBoardGame(boardGame));
+            assertTrue(invalidBoardGameException.getBoardGameErrors().contains("Price per day must be greater than 0!"));
         }
 
         @Test
@@ -69,8 +72,10 @@ class BoardGameFacadeAddTest {
             //given
             boardGame = BoardGameBuilder.create().setCondition(null).build();
             //then
-            assertThrows(InvalidBoardGameException.class, () -> boardGameFacade.addBoardGame(boardGame));
+            InvalidBoardGameException invalidBoardGameException = assertThrows(InvalidBoardGameException.class, () -> boardGameFacade.addBoardGame(boardGame));
+            assertTrue(invalidBoardGameException.getBoardGameErrors().contains("Set board game condition!"));
         }
     }
-
 }
+
+

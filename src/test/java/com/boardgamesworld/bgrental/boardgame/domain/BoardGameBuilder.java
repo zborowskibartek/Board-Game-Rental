@@ -4,7 +4,7 @@ import java.util.*;
 
 import static com.boardgamesworld.bgrental.boardgame.domain.BoardGameCategory.FAMILY;
 
-class BoardGameBuilder {
+public class BoardGameBuilder {
 
     private long boardGameId = 22;
     private String name = "Test";
@@ -13,7 +13,7 @@ class BoardGameBuilder {
     private BoardGameCondition condition = BoardGameCondition.USED;
     private BoardGameDetails details = BoardGameDetailsBuilder.any();
 
-    static BoardGame any() {
+    public static BoardGame anyBoardGame() {
         return new BoardGameBuilder().build();
     }
 
