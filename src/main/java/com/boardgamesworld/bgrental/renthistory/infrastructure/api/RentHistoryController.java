@@ -37,7 +37,7 @@ public class RentHistoryController {
 
     private RentHistoryDto toDto(RentHistory user) {
         return new RentHistoryDto(user.getUserId(),
-                user.getGameId(),
+                user.getBoardGameId(),
                 user.getRentedDate(),
                 user.getReturnedDate());
     }

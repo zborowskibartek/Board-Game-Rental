@@ -33,5 +33,4 @@ public class UserRepositoryInMemory implements UserRepository {
     public void deleteUser(long userId) {
         users.remove(userId);
     }
-
 }

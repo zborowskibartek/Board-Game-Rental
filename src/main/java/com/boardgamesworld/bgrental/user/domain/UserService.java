@@ -34,5 +34,4 @@ class UserService {
     void deleteUser(long userId) {
         userRepository.deleteUser(userId);
     }
-
 }

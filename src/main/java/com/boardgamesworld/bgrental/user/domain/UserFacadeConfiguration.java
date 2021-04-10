@@ -13,5 +13,4 @@ public class UserFacadeConfiguration {
         UserService userService = new UserService(userRepository, userValidator);
         return new UserFacade(userService);
     }
-
 }

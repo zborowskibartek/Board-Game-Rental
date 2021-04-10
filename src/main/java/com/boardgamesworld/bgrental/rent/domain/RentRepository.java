@@ -12,9 +12,9 @@ public interface RentRepository {
 
     List<Rent> getAllRents();
 
-    List<Rent> getAllRentsByUser(long userId);
+    List<Rent> getAllRentsByUserId(long userId);
 
-    List<Long> getAllRentBoardGameIds();
+    List<Long> getAllRentedBoardGameIds();
 
     List<Long> getAllRentBoardGameIdsByUser(long userId);
 

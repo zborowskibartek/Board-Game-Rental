@@ -1,8 +1,6 @@
-package com.boardgamesworld.bgrental.rent.infrastructure.database.inmemory;
+package com.boardgamesworld.bgrental.rent.domain;
 
-import com.boardgamesworld.bgrental.rent.domain.InvalidRentException;
-import com.boardgamesworld.bgrental.rent.domain.Rent;
-import com.boardgamesworld.bgrental.rent.domain.RentRepository;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -19,16 +17,16 @@ public class RentRepositoryInMemory implements RentRepository {
         rents.add(rent);
     }
 
-    public Rent getRent(long boardGameId){
+    public Rent getRent(long boardGameId) {
         return rents.stream()
-                .filter(rent -> rent.getGameId() == boardGameId )
+                .filter(rent -> rent.getBoardGameId() == boardGameId)
                 .findFirst()
                 .get();
     }
 
     @Override
     public void removeRent(long boardGameId) {
-        rents.removeIf(rent -> rent.getGameId() == boardGameId);
+        rents.removeIf(rent -> rent.getBoardGameId() == boardGameId);
     }
 
     @Override
@@ -37,16 +35,16 @@ public class RentRepositoryInMemory implements RentRepository {
     }
 
     @Override
-    public List<Rent> getAllRentsByUser(long userId) {
+    public List<Rent> getAllRentsByUserId(long userId) {
         return rents.stream()
                 .filter(rent -> rent.getUserId() == userId)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Long> getAllRentBoardGameIds() {
+    public List<Long> getAllRentedBoardGameIds() {
         return rents.stream()
-                .map(Rent::getGameId)
+                .map(Rent::getBoardGameId)
                 .collect(Collectors.toList());
     }
 
@@ -54,8 +52,7 @@ public class RentRepositoryInMemory implements RentRepository {
     public List<Long> getAllRentBoardGameIdsByUser(long userId) {
         return rents.stream()
                 .filter(rent -> rent.getUserId() == userId)
-                .map(Rent::getGameId)
+                .map(Rent::getBoardGameId)
                 .collect(Collectors.toList());
     }
-
 }

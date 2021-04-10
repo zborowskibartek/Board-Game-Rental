@@ -1,7 +1,6 @@
 package com.boardgamesworld.bgrental.user.domain;
 
 
-
 import java.util.List;
 
 public class UserFacade {
@@ -31,5 +30,4 @@ public class UserFacade {
     public void deleteUser(long userId) {
         userService.deleteUser(userId);
     }
-    
 }

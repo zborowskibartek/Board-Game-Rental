@@ -1,7 +1,5 @@
-package com.boardgamesworld.bgrental.renthistory.infrastructure.database.inmemory;
+package com.boardgamesworld.bgrental.renthistory.domain;
 
-import com.boardgamesworld.bgrental.renthistory.domain.RentHistory;
-import com.boardgamesworld.bgrental.renthistory.domain.RentHistoryRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
