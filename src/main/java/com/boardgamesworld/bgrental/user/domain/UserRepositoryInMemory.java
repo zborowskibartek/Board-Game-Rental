@@ -1,13 +1,10 @@
-package com.boardgamesworld.bgrental.user.infrastructure.database.inmemory;
+package com.boardgamesworld.bgrental.user.domain;
 
-import com.boardgamesworld.bgrental.user.domain.User;
-import com.boardgamesworld.bgrental.user.domain.UserRepository;
-import org.springframework.stereotype.Repository;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-
-import java.util.*;
-
-@Repository
 public class UserRepositoryInMemory implements UserRepository {
 
     private final Map<Long, User> users = new HashMap<>();

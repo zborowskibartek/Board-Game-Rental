@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
@@ -19,7 +20,7 @@ public class BoardGame {
     @Column(name = "id", updatable = false)
     private long boardGameId;
 
-    @Column(name = "name", nullable = false, columnDefinition = "VARCHAR(50)")
+    @Column(name = "name", nullable = false, updatable = false, columnDefinition = "VARCHAR(50)")
     private String name;
 
     @Column(name = "price", nullable = false, columnDefinition = "DOUBLE PRECISION")
