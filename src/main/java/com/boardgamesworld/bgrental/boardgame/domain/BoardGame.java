@@ -1,21 +1,38 @@
 package com.boardgamesworld.bgrental.boardgame.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
+
+import javax.persistence.*;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode
 @ToString
+
+@Entity
+@Table(name = "boardgames")
 public class BoardGame {
 
-    private final long boardGameId;
-    private final String name;
-    private final double pricePerDay;
-    private final boolean rented;
-    private final BoardGameCondition condition;
-    private final BoardGameDetails details;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false)
+    private long boardGameId;
+
+    @Column(name = "name", nullable = false, columnDefinition = "VARCHAR(50)")
+    private String name;
+
+    @Column(name = "price", nullable = false, columnDefinition = "DOUBLE PRECISION")
+    private double pricePerDay;
+
+    @Column(name = "is_rented", nullable = false, columnDefinition = "BOOLEAN")
+    private boolean rented;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "condition", nullable = false, columnDefinition = "VARCHAR(9)")
+    private BoardGameCondition condition;
+
+    @OneToOne(targetEntity = BoardGameDetails.class, cascade = CascadeType.ALL)
+    private BoardGameDetails details;
 
 }
