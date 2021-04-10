@@ -1,14 +1,17 @@
 package com.boardgamesworld.bgrental.boardgame.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class BoardGameDetails {
 
     private final String description;
@@ -16,7 +19,6 @@ public class BoardGameDetails {
     private final int maxPlayers;
     private final String author;
     private final String publisher;
-    private final List<BoardGameType> types;
-    private final List<BoardGameCategory> categories;
-
+    private final Set<BoardGameType> types;
+    private final Set<BoardGameCategory> categories;
 }

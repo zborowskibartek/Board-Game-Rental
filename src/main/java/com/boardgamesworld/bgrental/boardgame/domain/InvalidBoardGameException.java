@@ -6,7 +6,7 @@ public class InvalidBoardGameException extends RuntimeException {
 
     private final List<String> boardGameErrors;
 
-    public InvalidBoardGameException(List<String> boardGameErrors) {
+    InvalidBoardGameException(List<String> boardGameErrors) {
         this.boardGameErrors = boardGameErrors;
     }
 

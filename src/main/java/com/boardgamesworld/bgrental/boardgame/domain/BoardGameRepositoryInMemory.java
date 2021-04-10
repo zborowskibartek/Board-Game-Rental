@@ -1,7 +1,5 @@
-package com.boardgamesworld.bgrental.boardgame.infrastructure.database.inmemory;
+package com.boardgamesworld.bgrental.boardgame.domain;
 
-import com.boardgamesworld.bgrental.boardgame.domain.BoardGame;
-import com.boardgamesworld.bgrental.boardgame.domain.BoardGameRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

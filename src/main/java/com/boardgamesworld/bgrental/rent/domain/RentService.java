@@ -13,7 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 class RentService {
 
-
     private final RentRepository rentRepository;
     private final RentValidator rentValidator;
     private final BoardGameFacade boardGameFacade;

@@ -1,7 +1,5 @@
 package com.boardgamesworld.bgrental.boardgame.domain;
 
-import java.util.List;
-
 class BoardGameService {
 
     private final BoardGameRepository boardGameRepository;
@@ -10,10 +8,6 @@ class BoardGameService {
     BoardGameService(BoardGameRepository boardGameRepository, BoardGameValidator boardGameValidator) {
         this.boardGameRepository = boardGameRepository;
         this.boardGameValidator = boardGameValidator;
-    }
-
-    List<BoardGame> getAllBoardGames() {
-        return boardGameRepository.getAllBoardGames();
     }
 
     BoardGame getBoardGame(long boardGameId) {
@@ -33,5 +27,4 @@ class BoardGameService {
     void deleteBoardGame(long boardGameId) {
         boardGameRepository.deleteBoardGame(boardGameId);
     }
-
 }

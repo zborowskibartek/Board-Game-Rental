@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -20,7 +21,7 @@ public class BoardGameDetailsDto {
     private int maxPlayers;
     private String author;
     private String publisher;
-    private List<BoardGameType> types;
-    private List<BoardGameCategory> categories;
+    private Set<BoardGameType> types;
+    private Set<BoardGameCategory> categories;
 
 }
