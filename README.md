@@ -14,7 +14,7 @@ The Board Game Rental app covers the basic CRUD operations and provides addition
 
 Clone repo straightforward to destination directory and open through your IDE.
 
-`git clone [https://github.com/zborowskibartek/Board-Game-Rental.git](https://github.com/zborowskibartek/Board-Game-Rental.git)`
+`git clone https://github.com/zborowskibartek/Board-Game-Rental.git`
 
 Thanks to Spring Boot (web starter) you can start app on [localhost:8080](http://localhost:8080) and execute all endpoints via HTTP. For example: 
 
