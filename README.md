@@ -42,6 +42,7 @@ The project uses the following technologies:
 - Persistence: **Spring Data JPA**
 - Databse: **PostgreSQL**
 - Tests: **JUnit 5, Mockito**
+- Other: **Lombok**
 
 ## ⚠️ Project Status
 
