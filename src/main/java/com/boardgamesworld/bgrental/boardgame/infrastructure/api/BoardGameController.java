@@ -23,11 +23,12 @@ public class BoardGameController {
     }
 
     @GetMapping
-    public ResponseEntity<BoardGameResponse> getAllSortedBoardGames(@RequestParam(value = "sort", defaultValue = "NAME_ASC", required = false) String sort,
-                                                                 @RequestParam(value = "type", required = false) Set<BoardGameType> types,
-                                                                 @RequestParam(value = "category", required = false) Set<BoardGameCategory> categories,
-                                                                 @RequestParam(value = "offset", defaultValue = "0", required = false) int offset,
-                                                                 @RequestParam(value = "limit", defaultValue = "20", required = false) int limit) {
+    public ResponseEntity<BoardGameResponse> getAllSortedBoardGames(
+            @RequestParam(value = "sort", defaultValue = "NAME_ASC", required = false) String sort,
+            @RequestParam(value = "type", required = false) Set<BoardGameType> types,
+            @RequestParam(value = "category", required = false) Set<BoardGameCategory> categories,
+            @RequestParam(value = "offset", defaultValue = "0", required = false) int offset,
+            @RequestParam(value = "limit", defaultValue = "20", required = false) int limit) {
         List<BoardGame> boardGames = boardGameFacade.getAllBoardGames(parseSortType(sort), types, categories, offset, limit);
         List<BoardGameDto> boardGameDto = boardGames.stream()
                 .map(BoardGameMapper::toDto)

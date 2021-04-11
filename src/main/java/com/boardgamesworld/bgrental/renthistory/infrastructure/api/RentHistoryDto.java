@@ -17,5 +17,4 @@ public class RentHistoryDto {
     private long gameId;
     private LocalDateTime rentedDate;
     private LocalDateTime returnedDate;
-
 }

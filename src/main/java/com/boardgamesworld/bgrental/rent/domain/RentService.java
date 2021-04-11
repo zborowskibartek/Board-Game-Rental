@@ -36,12 +36,12 @@ class RentService {
     }
 
     List<Rent> getAllRentsByUser(long userId) {
-        return rentRepository.getAllRentsByUser(userId);
+        return rentRepository.getAllRentsByUserId(userId);
     }
 
     List<BoardGame> getAllRentBoardGames() {
         List<BoardGame> boardGames = new ArrayList<>();
-        rentRepository.getAllRentBoardGameIds()
+        rentRepository.getAllRentedBoardGameIds()
                 .forEach(boardGameId -> boardGames.add(boardGameFacade.getBoardGame(boardGameId)));
         return boardGames;
     }
@@ -72,7 +72,6 @@ class RentService {
 
     private void setBoardGameRentStatus(long boardGameId, boolean rented) {
         BoardGame boardGame = boardGameFacade.getBoardGame(boardGameId);
-
         boardGameFacade.updateBoardGame(boardGameId,
                 new BoardGame(boardGameId,
                         boardGame.getName(),
@@ -86,7 +85,7 @@ class RentService {
         Rent rent = rentRepository.getRent(boardGameId);
         rentHistoryFacade.addRentHistory(
                 new RentHistory(rent.getUserId(),
-                        rent.getGameId(),
+                        rent.getBoardGameId(),
                         rent.getRentedDate(),
                         LocalDateTime.now()));
     }

@@ -1,6 +1,5 @@
 package com.boardgamesworld.bgrental.user.domain;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -88,13 +87,11 @@ class UserValidator {
 
     private boolean isEmailChanged(long userId, String email) {
         User user = userRepository.getUser(userId);
-
         return !user.getEmail().equals(email);
     }
 
     private boolean isNickChanged(long userId, String nick) {
         User user = userRepository.getUser(userId);
-
         return !user.getNick().equals(nick);
     }
 

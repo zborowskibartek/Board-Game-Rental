@@ -2,14 +2,12 @@ package com.boardgamesworld.bgrental.rent.infrastructure.api;
 
 
 import com.boardgamesworld.bgrental.boardgame.domain.BoardGame;
-import com.boardgamesworld.bgrental.boardgame.domain.BoardGameFacade;
 import com.boardgamesworld.bgrental.boardgame.infrastructure.api.BoardGameDto;
 import com.boardgamesworld.bgrental.boardgame.infrastructure.api.BoardGameMapper;
 import com.boardgamesworld.bgrental.boardgame.infrastructure.api.BoardGameResponse;
 import com.boardgamesworld.bgrental.rent.domain.InvalidRentException;
 import com.boardgamesworld.bgrental.rent.domain.Rent;
 import com.boardgamesworld.bgrental.rent.domain.RentFacade;
-import com.boardgamesworld.bgrental.user.domain.UserFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -24,14 +22,10 @@ import java.util.stream.Collectors;
 public class RentController {
 
     private final RentFacade rentFacade;
-    private final UserFacade userFacade;
-    private final BoardGameFacade boardGameFacade;
     private final Logger logger = LoggerFactory.getLogger(RentController.class);
 
-    public RentController(RentFacade rentFacade, UserFacade userFacade, BoardGameFacade boardGameFacade) {
+    public RentController(RentFacade rentFacade) {
         this.rentFacade = rentFacade;
-        this.userFacade = userFacade;
-        this.boardGameFacade = boardGameFacade;
     }
 
     @PostMapping("/rent")
@@ -94,6 +88,6 @@ public class RentController {
     }
 
     private RentDto toDto(Rent rent) {
-        return new RentDto(rent.getGameId(), rent.getUserId());
+        return new RentDto(rent.getBoardGameId(), rent.getUserId());
     }
 }
