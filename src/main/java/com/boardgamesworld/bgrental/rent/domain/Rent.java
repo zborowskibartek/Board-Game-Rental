@@ -16,6 +16,7 @@ public class Rent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private long rentId;
 
     @Column(name = "user_id", nullable = false, updatable = false, columnDefinition = "DOUBLE PRECISION")

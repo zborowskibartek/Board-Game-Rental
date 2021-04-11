@@ -10,11 +10,12 @@ import java.time.LocalDateTime;
 @Getter
 
 @Entity
-@Table(name = "renthitories")
+@Table(name = "rent_histories")
 public class RentHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private long rentHistoryId;
 
     @Column(name = "user_id", nullable = false, updatable = false, columnDefinition = "DOUBLE PRECISION")
@@ -26,7 +27,7 @@ public class RentHistory {
     @Column(name = "rented_date", nullable = false, updatable = false, columnDefinition = "DATE")
     private LocalDateTime rentedDate;
 
-    @Column(name = "rented_date", nullable = false, updatable = false, columnDefinition = "DATE")
+    @Column(name = "returned_date", nullable = false, updatable = false, columnDefinition = "DATE")
     private LocalDateTime returnedDate;
 
     public RentHistory(long userId, long boardGameId, LocalDateTime rentedDate, LocalDateTime returnedDate) {
